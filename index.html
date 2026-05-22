@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Microwave Photonics Lab — Gabriel Santamaria-Botello</title>
+<meta name="description" content="Microwave Photonics Lab at Colorado School of Mines. PI: Gabriel Santamaria-Botello. Integrated photonics for classical and quantum microwave sensors." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ---------- TOKENS ---------- */
+  :root{
+    --ink:#0a0d12;
+    --ink-2:#13181f;
+    --paper:#f4f1ea;
+    --paper-2:#ebe6db;
+    --line:#1b2129;
+    --mute:#5b6470;
+    --accent:#d94f2a;          /* burnt orange — microwave spectrum warmth */
+    --accent-2:#2b6cb0;        /* deep blue — optical/photonic */
+    --accent-3:#c9a449;        /* brass */
+    --glow: 0 0 0 1px rgba(217,79,42,.35), 0 12px 40px -12px rgba(217,79,42,.45);
+    --serif:'Fraunces', Georgia, serif;
+    --sans:'Inter Tight', system-ui, sans-serif;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:var(--paper)}
+
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  /* ---------- GRAIN / TEXTURE ---------- */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:.06;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode:multiply;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;
+    z-index:100;
+    padding:18px 36px;
+    display:flex;justify-content:space-between;align-items:center;
+    backdrop-filter:blur(10px);
+    background:rgba(244,241,234,.75);
+    border-bottom:1px solid rgba(11,15,20,.08);
+    transition:padding .3s ease;
+  }
+  .nav.scrolled{padding:12px 36px}
+  .brand{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;
+  }
+  .brand-dot{
+    width:8px;height:8px;
+    background:var(--accent);
+    border-radius:50%;
+    box-shadow:0 0 0 4px rgba(217,79,42,.18);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{transform:scale(1);box-shadow:0 0 0 4px rgba(217,79,42,.18)}
+    50%{transform:scale(1.15);box-shadow:0 0 0 8px rgba(217,79,42,0)}
+  }
+  .nav-links{
+    display:flex;gap:28px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+  .nav-links a{
+    position:relative;
+    padding:4px 0;
+    color:var(--ink);
+    opacity:.7;
+    transition:opacity .2s;
+  }
+  .nav-links a:hover{opacity:1}
+  .nav-links a::after{
+    content:"";
+    position:absolute;left:0;right:0;bottom:-2px;
+    height:1px;background:var(--accent);
+    transform:scaleX(0);transform-origin:left;
+    transition:transform .3s ease;
+  }
+  .nav-links a:hover::after{transform:scaleX(1)}
+
+  @media (max-width:760px){
+    .nav{padding:14px 20px}
+    .nav-links{display:none}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    padding:140px 36px 80px;
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:48px;
+    align-content:center;
+    overflow:hidden;
+  }
+
+  /* spectral background */
+  .hero-spectrum{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    opacity:.55;
+  }
+  .hero-spectrum svg{width:100%;height:100%}
+
+  .hero-eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--mute);
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:20px;
+  }
+  .hero-eyebrow::before{
+    content:"";
+    width:36px;height:1px;background:var(--ink);
+  }
+
+  .hero-title{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:clamp(48px, 9vw, 132px);
+    line-height:.94;
+    letter-spacing:-.02em;
+    margin-bottom:32px;
+    position:relative;
+    z-index:2;
+  }
+  .hero-title em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--accent);
+    font-variation-settings:"opsz" 144;
+  }
+  .hero-title .underline{
+    display:inline-block;
+    position:relative;
+  }
+  .hero-title .underline::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;bottom:.08em;
+    height:.18em;
+    background:var(--accent);
+    opacity:.18;
+    z-index:-1;
+  }
+
+  .hero-meta{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:28px 48px;
+    max-width:980px;
+    padding-top:28px;
+    border-top:1px solid rgba(11,15,20,.15);
+    position:relative;z-index:2;
+  }
+  .hero-meta-item .label{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--mute);
+    margin-bottom:6px;
+  }
+  .hero-meta-item .value{
+    font-family:var(--serif);
+    font-size:18px;
+    line-height:1.4;
+  }
+
+  .hero-tagline{
+    max-width:680px;
+    font-size:19px;
+    line-height:1.6;
+    color:var(--ink-2);
+    margin-bottom:8px;
+    position:relative;z-index:2;
+  }
+  .hero-tagline strong{font-weight:500;color:var(--accent)}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{
+    padding:120px 36px;
+    position:relative;
+  }
+  .section-head{
+    display:flex;align-items:baseline;gap:20px;
+    margin-bottom:64px;
+    flex-wrap:wrap;
+  }
+  .section-num{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.18em;
+    color:var(--accent);
+  }
+  .section-title{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(36px, 5vw, 64px);
+    line-height:1;
+    letter-spacing:-.015em;
+  }
+  .section-title em{font-style:italic;color:var(--accent)}
+  .section-kicker{
+    margin-left:auto;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--mute);
+    max-width:300px;
+    text-align:right;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{
+    background:var(--paper);
+  }
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:80px;
+    max-width:1400px;
+    margin:0 auto;
+    align-items:start;
+  }
+  .about-grid.single{
+    grid-template-columns:1fr;
+    max-width:900px;
+  }
+  .about-prose p{
+    font-family:var(--serif);
+    font-size:21px;
+    line-height:1.55;
+    margin-bottom:24px;
+    color:var(--ink-2);
+  }
+  .about-prose p:first-of-type::first-letter{
+    font-size:5em;
+    float:left;
+    line-height:.85;
+    margin:.05em .12em 0 -.05em;
+    font-weight:500;
+    color:var(--accent);
+  }
+  .about-prose .highlight{
+    background:linear-gradient(180deg, transparent 60%, rgba(217,79,42,.18) 60%);
+    padding:0 2px;
+  }
+
+  .about-side{
+    position:sticky;top:120px;
+    padding:32px;
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:2px;
+  }
+  .about-side h4{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    opacity:.6;
+    margin-bottom:20px;
+  }
+  .about-side ul{list-style:none}
+  .about-side li{
+    padding:14px 0;
+    border-bottom:1px solid rgba(244,241,234,.1);
+    display:flex;justify-content:space-between;align-items:center;
+    gap:16px;
+  }
+  .about-side li:last-child{border-bottom:none}
+  .about-side .stat-label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    opacity:.7;
+  }
+  .about-side .stat-value{
+    font-family:var(--serif);
+    font-size:28px;
+    font-weight:400;
+    color:var(--accent-3);
+  }
+
+  @media (max-width:960px){
+    .about-grid{grid-template-columns:1fr;gap:48px}
+    .about-side{position:static}
+  }
+
+  /* ---------- RESEARCH ---------- */
+  .research{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .research .section-title em{color:var(--accent-3)}
+  .research .section-num{color:var(--accent-3)}
+  .research .section-kicker{color:rgba(244,241,234,.5)}
+
+  .research-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:2px;
+    background:rgba(244,241,234,.08);
+    border:1px solid rgba(244,241,234,.08);
+  }
+  .research-card{
+    background:var(--ink);
+    padding:40px 32px;
+    position:relative;
+    transition:background .3s ease;
+    min-height:380px;
+    display:flex;flex-direction:column;
+  }
+  .research-card:hover{background:var(--ink-2)}
+  .research-card .rc-num{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.18em;
+    color:var(--accent);
+    margin-bottom:24px;
+  }
+  .research-card h3{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:26px;
+    line-height:1.15;
+    margin-bottom:18px;
+    letter-spacing:-.01em;
+  }
+  .research-card h3 em{color:var(--accent-3);font-style:italic}
+  .research-card p{
+    font-size:15px;
+    line-height:1.6;
+    color:rgba(244,241,234,.7);
+    margin-bottom:20px;
+  }
+  .research-card .tags{
+    margin-top:auto;
+    display:flex;flex-wrap:wrap;gap:8px;
+  }
+  .research-card .tag{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:5px 9px;
+    border:1px solid rgba(244,241,234,.18);
+    color:rgba(244,241,234,.7);
+  }
+
+  /* ---------- FUNDING / NUMBERS ---------- */
+  .numbers{
+    background:var(--paper-2);
+    padding:100px 36px;
+    border-top:1px solid rgba(11,15,20,.08);
+    border-bottom:1px solid rgba(11,15,20,.08);
+  }
+  .numbers-grid{
+    max-width:1300px;margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:48px 24px;
+  }
+  .num-item{
+    text-align:left;
+    border-left:1px solid var(--ink);
+    padding-left:20px;
+  }
+  .num-item .big{
+    font-family:var(--serif);
+    font-size:clamp(48px,6vw,84px);
+    line-height:1;
+    font-weight:400;
+    letter-spacing:-.03em;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+  .num-item .big em{color:var(--accent);font-style:italic}
+  .num-item .lab{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--mute);
+    max-width:200px;
+  }
+
+  /* ---------- PUBLICATIONS ---------- */
+  .pubs{background:var(--paper)}
+  .pub-list{
+    max-width:1300px;margin:0 auto;
+    display:grid;gap:0;
+  }
+  .pub{
+    display:grid;
+    grid-template-columns:60px 1fr auto;
+    gap:32px;
+    padding:32px 0;
+    border-bottom:1px solid rgba(11,15,20,.12);
+    align-items:start;
+    transition:padding .25s ease;
+  }
+  .pub:hover{padding-left:12px}
+  .pub:first-child{border-top:1px solid rgba(11,15,20,.12)}
+  .pub-num{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.1em;
+    color:var(--mute);
+    padding-top:6px;
+  }
+  .pub-body .venue{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:10px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .pub-body .venue .if{
+    color:var(--mute);
+    border-left:1px solid var(--mute);
+    padding-left:12px;
+  }
+  .pub-body .title{
+    font-family:var(--serif);
+    font-size:21px;
+    line-height:1.35;
+    margin-bottom:8px;
+    font-weight:400;
+  }
+  .pub-body .authors{
+    font-size:14px;
+    color:var(--mute);
+    line-height:1.5;
+  }
+  .pub-body .authors strong{color:var(--ink);font-weight:500}
+  .pub-year{
+    font-family:var(--serif);
+    font-size:32px;
+    font-weight:300;
+    font-style:italic;
+    color:var(--ink);
+    padding-top:6px;
+  }
+  .pub-toggle{
+    display:flex;justify-content:center;
+    margin-top:48px;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .pub-toggle button{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    padding:10px 18px;
+    background:transparent;
+    color:var(--ink);
+    border:1px solid var(--ink);
+    cursor:pointer;
+    transition:all .2s;
+  }
+  .pub-toggle button:hover,
+  .pub-toggle button.active{
+    background:var(--ink);
+    color:var(--paper);
+  }
+
+  @media (max-width:760px){
+    .pub{grid-template-columns:1fr;gap:8px}
+    .pub-year{font-size:22px}
+    .pub-num{display:none}
+  }
+
+  /* ---------- TEAM ---------- */
+  .team{
+    background:var(--paper-2);
+  }
+  .team-grid{
+    max-width:1300px;margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:20px;
+  }
+  .person{
+    padding:28px 24px;
+    background:var(--paper);
+    border:1px solid rgba(11,15,20,.1);
+    transition:transform .25s ease, box-shadow .25s ease;
+    position:relative;
+  }
+  .person:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 40px -18px rgba(11,15,20,.25);
+  }
+  .person .role{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:14px;
+  }
+  .person .name{
+    font-family:var(--serif);
+    font-size:22px;
+    font-weight:400;
+    line-height:1.2;
+    margin-bottom:8px;
+  }
+  .person .detail{
+    font-size:13px;
+    color:var(--mute);
+    line-height:1.5;
+  }
+  .person .glyph{
+    position:absolute;
+    top:24px;right:24px;
+    width:24px;height:24px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--accent), #8a2c11);
+    opacity:.85;
+  }
+  .person.pi .glyph{background:radial-gradient(circle at 30% 30%, var(--accent-3), #6d5520)}
+
+  /* ---------- TEACHING ---------- */
+  .teaching{
+    background:var(--paper);
+  }
+  .courses{
+    max-width:1300px;margin:0 auto;
+    display:grid;gap:0;
+  }
+  .course{
+    display:grid;
+    grid-template-columns:140px 1fr 1.2fr;
+    gap:48px;
+    padding:36px 0;
+    border-bottom:1px solid rgba(11,15,20,.12);
+    align-items:start;
+  }
+  .course:first-child{border-top:1px solid rgba(11,15,20,.12)}
+  .course-code{
+    font-family:var(--mono);
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:.04em;
+    color:var(--accent);
+    padding-top:4px;
+  }
+  .course-code .level{
+    display:block;
+    font-size:10px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--mute);
+    margin-top:6px;
+    font-weight:400;
+  }
+  .course-title{
+    font-family:var(--serif);
+    font-size:24px;
+    font-weight:400;
+    line-height:1.25;
+  }
+  .course-title .badge{
+    display:inline-block;
+    margin-left:10px;
+    font-family:var(--mono);
+    font-size:9px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    padding:3px 8px;
+    background:var(--ink);
+    color:var(--paper);
+    vertical-align:middle;
+  }
+  .course-desc{
+    font-size:15px;
+    line-height:1.6;
+    color:var(--ink-2);
+  }
+  @media (max-width:860px){
+    .course{grid-template-columns:1fr;gap:8px}
+  }
+
+  /* ---------- JOIN / CONTACT ---------- */
+  .contact{
+    background:var(--ink);
+    color:var(--paper);
+    padding:120px 36px 60px;
+    position:relative;
+    overflow:hidden;
+  }
+  .contact-bg{
+    position:absolute;inset:0;
+    opacity:.15;
+    background:
+      radial-gradient(circle at 20% 40%, var(--accent) 0%, transparent 35%),
+      radial-gradient(circle at 80% 60%, var(--accent-2) 0%, transparent 40%);
+  }
+  .contact-inner{
+    position:relative;z-index:2;
+    max-width:1300px;margin:0 auto;
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:80px;
+    align-items:start;
+  }
+  .contact h2{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:clamp(48px, 7vw, 96px);
+    line-height:.95;
+    letter-spacing:-.02em;
+    margin-bottom:32px;
+  }
+  .contact h2 em{color:var(--accent-3);font-style:italic}
+  .contact-prose p{
+    font-size:18px;
+    line-height:1.6;
+    margin-bottom:20px;
+    color:rgba(244,241,234,.8);
+    max-width:580px;
+  }
+  .contact-actions{
+    display:flex;flex-direction:column;gap:14px;
+    margin-top:36px;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    padding:18px 26px;
+    border:1px solid rgba(244,241,234,.3);
+    color:var(--paper);
+    display:inline-flex;align-items:center;justify-content:space-between;
+    gap:20px;
+    transition:all .25s ease;
+    background:transparent;
+  }
+  .btn:hover{
+    border-color:var(--accent);
+    background:rgba(217,79,42,.08);
+    transform:translateX(4px);
+  }
+  .btn .arrow{font-family:var(--serif);font-size:18px;letter-spacing:0}
+
+  .contact-info{
+    padding:36px;
+    border:1px solid rgba(244,241,234,.15);
+    background:rgba(244,241,234,.02);
+  }
+  .contact-info h4{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--accent-3);
+    margin-bottom:24px;
+  }
+  .contact-info dl{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:14px 20px;
+    font-size:14px;
+  }
+  .contact-info dt{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:rgba(244,241,234,.5);
+    padding-top:3px;
+  }
+  .contact-info dd{color:rgba(244,241,234,.9);line-height:1.5}
+
+  @media (max-width:860px){
+    .contact-inner{grid-template-columns:1fr;gap:48px}
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:rgba(244,241,234,.5);
+    padding:36px;
+    border-top:1px solid rgba(244,241,234,.08);
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:16px;
+  }
+
+  /* ---------- NEWS & HIGHLIGHTS ---------- */
+  .news{
+    background:var(--paper);
+    padding:120px 36px;
+  }
+  .news-layout{
+    max-width:1400px;margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:64px;
+    align-items:start;
+  }
+
+  /* highlights — large cards in a responsive grid */
+  .highlights{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+    gap:24px;
+  }
+  .highlights .featured{
+    grid-column:1 / -1;
+  }
+  .hl-card{
+    position:relative;
+    padding:40px 36px;
+    background:var(--paper-2);
+    border:1px solid rgba(11,15,20,.1);
+    border-left:3px solid var(--accent);
+    transition:transform .3s ease, box-shadow .3s ease;
+    overflow:hidden;
+  }
+  .hl-card:hover{
+    transform:translateX(4px);
+    box-shadow:-6px 12px 32px -16px rgba(11,15,20,.25);
+  }
+  .hl-card.featured{
+    background:var(--ink);
+    color:var(--paper);
+    border-left-color:var(--accent-3);
+    padding:48px 40px;
+  }
+  .hl-card .hl-cat{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    color:var(--accent);
+  }
+  .hl-card.featured .hl-cat{color:var(--accent-3)}
+  .hl-card .hl-cat::before{
+    content:"";
+    width:18px;height:1px;background:currentColor;
+  }
+  .hl-card .hl-title{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:28px;
+    line-height:1.2;
+    letter-spacing:-.01em;
+    margin-bottom:14px;
+  }
+  .hl-card.featured .hl-title{font-size:34px}
+  .hl-card .hl-title em{font-style:italic;color:var(--accent)}
+  .hl-card.featured .hl-title em{color:var(--accent-3)}
+  .hl-card .hl-desc{
+    font-size:15px;
+    line-height:1.6;
+    color:var(--ink-2);
+    margin-bottom:16px;
+  }
+  .hl-card.featured .hl-desc{color:rgba(244,241,234,.78)}
+  .hl-card .hl-date{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.12em;
+    color:var(--mute);
+  }
+  .hl-card.featured .hl-date{color:rgba(244,241,234,.5)}
+  .hl-card .hl-meta{
+    display:flex;gap:14px;flex-wrap:wrap;
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px solid rgba(11,15,20,.1);
+  }
+  .hl-card.featured .hl-meta{border-top-color:rgba(244,241,234,.15)}
+  .hl-card .hl-meta span{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--mute);
+  }
+  .hl-card.featured .hl-meta span{color:rgba(244,241,234,.55)}
+
+  /* news ticker — right side */
+  .news-feed{
+    position:sticky;
+    top:120px;
+    background:var(--ink);
+    color:var(--paper);
+    padding:36px 32px;
+  }
+  .news-feed h4{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--accent-3);
+    margin-bottom:24px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .news-feed h4::before{
+    content:"";
+    width:6px;height:6px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px rgba(217,79,42,.25);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  .news-feed ul{list-style:none;max-height:560px;overflow-y:auto;padding-right:8px}
+  .news-feed ul::-webkit-scrollbar{width:4px}
+  .news-feed ul::-webkit-scrollbar-thumb{background:rgba(244,241,234,.2)}
+  .news-feed li{
+    padding:18px 0;
+    border-bottom:1px solid rgba(244,241,234,.08);
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:14px;
+    align-items:start;
+  }
+  .news-feed li:last-child{border-bottom:none}
+  .news-feed .nf-date{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.1em;
+    color:var(--accent-3);
+    padding-top:2px;
+    white-space:nowrap;
+    min-width:60px;
+  }
+  .news-feed .nf-text{
+    font-size:13px;
+    line-height:1.5;
+    color:rgba(244,241,234,.82);
+  }
+  .news-feed .nf-text strong{color:var(--paper);font-weight:500}
+
+  @media (max-width:960px){
+    .news-layout{grid-template-columns:1fr;gap:40px}
+    .news-feed{position:static;max-height:none}
+    .news-feed ul{max-height:none}
+  }
+
+  /* ---------- INVITED TALKS ---------- */
+  .talks{
+    background:var(--paper-2);
+  }
+  .talks-list{
+    max-width:1300px;margin:0 auto;
+    display:grid;gap:0;
+  }
+  .talk{
+    display:grid;
+    grid-template-columns:90px 1fr 200px;
+    gap:36px;
+    padding:32px 0;
+    border-bottom:1px solid rgba(11,15,20,.12);
+    align-items:baseline;
+    transition:padding .25s ease;
+    position:relative;
+  }
+  .talk:first-child{border-top:1px solid rgba(11,15,20,.12)}
+  .talk:hover{padding-left:12px}
+  .talk.invited::before{
+    content:"";
+    position:absolute;
+    left:-12px;top:50%;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--accent);
+    transform:translateY(-50%);
+    opacity:0;
+    transition:opacity .25s ease, left .25s ease;
+  }
+  .talk.invited:hover::before{opacity:1;left:0}
+  .talk-year{
+    font-family:var(--serif);
+    font-size:32px;
+    font-weight:300;
+    font-style:italic;
+    line-height:1;
+  }
+  .talk-body .talk-flag{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:8px;
+    display:inline-block;
+  }
+  .talk-body .talk-title{
+    font-family:var(--serif);
+    font-size:20px;
+    line-height:1.35;
+    font-weight:400;
+    margin-bottom:6px;
+  }
+  .talk-body .talk-venue{
+    font-size:13px;
+    color:var(--mute);
+    line-height:1.5;
+  }
+  .talk-location{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-2);
+    text-align:right;
+  }
+  .talk-location .country{
+    display:block;
+    color:var(--mute);
+    font-size:10px;
+    margin-top:4px;
+  }
+  @media (max-width:760px){
+    .talk{grid-template-columns:1fr;gap:8px}
+    .talk-year{font-size:22px}
+    .talk-location{text-align:left}
+  }
+
+  /* ---------- ANIMATIONS ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#top" class="brand">
+    <span class="brand-dot"></span>
+    <span>Microwave Photonics Lab</span>
+  </a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#news">News</a>
+    <a href="#research">Research</a>
+    <a href="#publications">Publications</a>
+    <a href="#talks">Talks</a>
+    <a href="#team">Team</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#join">Join</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <!-- spectral background svg -->
+  <div class="hero-spectrum" aria-hidden="true">
+    <svg viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="g1" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%" stop-color="#d94f2a" stop-opacity="0"/>
+          <stop offset="40%" stop-color="#d94f2a" stop-opacity=".35"/>
+          <stop offset="70%" stop-color="#c9a449" stop-opacity=".25"/>
+          <stop offset="100%" stop-color="#2b6cb0" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="g2" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#0a0d12" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#0a0d12" stop-opacity=".06"/>
+        </linearGradient>
+      </defs>
+      <!-- horizontal spectrum band -->
+      <rect x="0" y="540" width="1400" height="2" fill="#0a0d12" opacity=".4"/>
+      <!-- frequency ticks -->
+      <g font-family="JetBrains Mono, monospace" font-size="9" fill="#0a0d12" opacity=".5">
+        <line x1="120" y1="540" x2="120" y2="552" stroke="#0a0d12"/>
+        <text x="120" y="568" text-anchor="middle">1 GHz</text>
+        <line x1="380" y1="540" x2="380" y2="552" stroke="#0a0d12"/>
+        <text x="380" y="568" text-anchor="middle">10 GHz</text>
+        <line x1="640" y1="540" x2="640" y2="552" stroke="#0a0d12"/>
+        <text x="640" y="568" text-anchor="middle">100 GHz</text>
+        <line x1="900" y1="540" x2="900" y2="552" stroke="#0a0d12"/>
+        <text x="900" y="568" text-anchor="middle">1 THz</text>
+        <line x1="1160" y1="540" x2="1160" y2="552" stroke="#0a0d12"/>
+        <text x="1160" y="568" text-anchor="middle">200 THz · optical</text>
+      </g>
+      <!-- waveform -->
+      <path d="M 0 460 Q 100 380 200 460 T 400 460 T 600 460 T 800 460 T 1000 460 T 1200 460 T 1400 460"
+            stroke="#d94f2a" stroke-width="1.2" fill="none" opacity=".5"/>
+      <path d="M 0 480 Q 80 420 160 480 T 320 480 T 480 480 T 640 480 T 800 480 T 960 480 T 1120 480 T 1280 480 T 1440 480"
+            stroke="#2b6cb0" stroke-width="1" fill="none" opacity=".4"/>
+      <!-- big gradient bar -->
+      <rect x="0" y="500" width="1400" height="36" fill="url(#g1)"/>
+      <rect x="0" y="0" width="1400" height="800" fill="url(#g2)"/>
+    </svg>
+  </div>
+
+  <div style="position:relative;z-index:2;max-width:1400px;width:100%;margin:0 auto">
+    <div class="hero-eyebrow">Colorado School of Mines · Electrical Engineering</div>
+
+    <h1 class="hero-title reveal">
+      Microwave<br/>
+      <em>×</em> <span class="underline">Photonics</span><br/>
+      Lab.
+    </h1>
+
+    <p class="hero-tagline reveal">
+      We engineer <strong>photonic integrated circuits</strong> that push microwave sensors and transducers beyond the limits of conventional electronics — for quantum computing, precision timekeeping, Earth observation, and electromagnetic warfare.
+    </p>
+
+    <div class="hero-meta reveal">
+      <div class="hero-meta-item">
+        <div class="label">Principal Investigator</div>
+        <div class="value">Gabriel Santamaria-Botello, PhD</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Department</div>
+        <div class="value">Electrical Engineering<br/>Colorado School of Mines</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Founded</div>
+        <div class="value">August 2023</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">External Funding</div>
+        <div class="value">$1.65M+ as PI (lab share)</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-head reveal">
+    <span class="section-num">§ 01</span>
+    <h2 class="section-title">The <em>PI</em>.</h2>
+    <span class="section-kicker">Gabriel Santamaria-Botello, PhD</span>
+  </div>
+
+  <div class="about-grid single">
+    <div class="about-prose reveal">
+      <p>
+        Gabriel Santamaria-Botello is an Assistant Professor in the Electrical Engineering Department at the Colorado School of Mines, where his group leverages recent advances in <span class="highlight">photonic integrated circuit technology</span> to engineer microwave receivers, transceivers and sensors that outperform their electronic counterparts.
+      </p>
+      <p>
+        Before joining Mines in August 2023, Gabriel was a Visiting Professor at EPFL's Laboratory of Photonics and Quantum Measurements with Prof. Tobias J. Kippenberg, and a Research Associate at the University of Colorado Boulder in the Microwave and RF Research Group of Prof. Zoya Popovic. He earned his PhD <em>cum laude</em> from University Charles III of Madrid, with prior research stays at the University of Otago and a B.Sc. in Electrical Engineering from the University of Carabobo, Venezuela, where he ranked first in his class.
+      </p>
+      <p>
+        His early theoretical work established sensitivity bounds for photonic upconversion (<em>Optica</em>, 2018), proposing that electro-optic systems could surpass the noise performance of state-of-the-art transistors — a hypothesis his group and collaborators recently validated experimentally with publications in <em>Nature</em> and <em>Nature Photonics</em> (under review). The group's research spans quantum sensing, superconducting quantum computing, defense and electromagnetic warfare, Earth observation, radio astronomy, and communications.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS / FUNDING -->
+<section class="numbers">
+  <div class="numbers-grid">
+    <div class="num-item reveal">
+      <div class="big">$<em>1.65</em>M</div>
+      <div class="lab">External funding secured (Mines lab share)</div>
+    </div>
+    <div class="num-item reveal">
+      <div class="big"><em>6</em></div>
+      <div class="lab">Federally funded projects · DARPA, AFOSR, USSF, COEDIT</div>
+    </div>
+    <div class="num-item reveal">
+      <div class="big"><em>4</em></div>
+      <div class="lab">Patents · 1 issued, 3 provisional</div>
+    </div>
+    <div class="num-item reveal">
+      <div class="big"><em>$4</em>M+</div>
+      <div class="lab">VC raised by lab-spinout Bifrost Electronics</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS & HIGHLIGHTS -->
+<section class="news" id="news">
+  <div class="section-head reveal">
+    <span class="section-num">§ 02</span>
+    <h2 class="section-title">News &amp; <em>highlights</em>.</h2>
+    <span class="section-kicker">Recent milestones from the lab</span>
+  </div>
+
+  <div class="news-layout">
+
+    <!-- LEFT: featured highlights -->
+    <div class="highlights">
+
+      <article class="hl-card featured reveal">
+        <div class="hl-cat">Featured · Publication</div>
+        <h3 class="hl-title">Our work on <em>integrated electro-optic frequency combs</em> in lithium tantalate published in Nature.</h3>
+        <p class="hl-desc">
+          With collaborators at EPFL, we demonstrated record-span electro-optic frequency comb generation in a fully photonic chip — validating a hypothesis from our early theoretical work nearly a decade ago. Connor Denney is co-author.
+        </p>
+        <div class="hl-date">January 2025 · Nature 637(8048):1096–1103 · IF 48.5</div>
+        <div class="hl-meta">
+          <span>LiTaO₃</span>
+          <span>EPFL collaboration</span>
+          <span>Microwave-to-optical transduction</span>
+        </div>
+      </article>
+
+      <article class="hl-card reveal">
+        <div class="hl-cat">Grant · DARPA</div>
+        <h3 class="hl-title">Selected as performer in the <em>$1.65M DARPA HARQ</em> program.</h3>
+        <p class="hl-desc">
+          One of 19 teams selected to develop heterogeneous quantum architectures, focused on microwave-to-optical quantum transducers for quantum computing networks. Lab share: $400k plus $130k option. Two-year program with EPFL as prime.
+        </p>
+        <div class="hl-date">2026 – 2028</div>
+      </article>
+
+      <article class="hl-card reveal">
+        <div class="hl-cat">Spinout · Bifrost Electronics</div>
+        <h3 class="hl-title">Lab spinout <em>Bifrost Electronics</em> raises over $4M in venture funding.</h3>
+        <p class="hl-desc">
+          Founded by PhD student Connor Denney from an Advanced Industries grant, Bifrost has licensed our strontium titanate parametric amplifier technology from Mines' TTO and now employs several former Mines students.
+        </p>
+        <div class="hl-date">2024 – present</div>
+        <div class="hl-meta">
+          <span>STO Varactors</span>
+          <span>TWPAs</span>
+          <span>Provisional patent</span>
+        </div>
+      </article>
+
+      <article class="hl-card reveal">
+        <div class="hl-cat">Publication · Under review</div>
+        <h3 class="hl-title">Integrated photonic mm-wave receiver with <em>sub-ambient noise</em> — under minor revisions at Nature Photonics.</h3>
+        <p class="hl-desc">
+          Demonstration of ultra-low-noise millimeter-wave detection in a fully photonic chip. The microwave structure co-design, led by our group, was key to the unprecedented transduction efficiency.
+        </p>
+        <div class="hl-date">arXiv:2510.06176 · IF 32.9</div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="research" id="research">
+  <div class="section-head reveal">
+    <span class="section-num">§ 03</span>
+    <h2 class="section-title">Research <em>thrusts</em>.</h2>
+    <span class="section-kicker">From kHz to optical · classical and quantum</span>
+  </div>
+
+  <div class="research-grid">
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.1 / Photonic integrated circuits</div>
+      <h3>Frequency-agile <em>RF sensors</em> beyond the Chu–Wheeler–Harrington limit.</h3>
+      <p>
+        Electro-optic transducers covering kHz to tens of GHz in an ultra-compact footprint that breaks the fundamental limitations of electrically small antennas. Sole performer on a $945k DARPA program; continuation under negotiation with the U.S. Space Force.
+      </p>
+      <div class="tags">
+        <span class="tag">DARPA</span>
+        <span class="tag">USSF</span>
+        <span class="tag">Electrically small antennas</span>
+      </div>
+    </article>
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.2 / Quantum networks</div>
+      <h3>Microwave-to-optical <em>quantum transducers</em>.</h3>
+      <p>
+        Lithium tantalate photonic integrated circuits for heterogeneous quantum computing networks. One of 19 performers selected in the $1.65M DARPA HARQ program, in partnership with Kippenberg's group at EPFL.
+      </p>
+      <div class="tags">
+        <span class="tag">DARPA HARQ</span>
+        <span class="tag">EPFL</span>
+        <span class="tag">LiTaO₃</span>
+      </div>
+    </article>
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.3 / Precision timing</div>
+      <h3>Fully photonic <em>mm-wave receivers</em> for optical atomic clocks.</h3>
+      <p>
+        Synchronizing remote optical atomic clocks for positioning, navigation, and timing applications. AFOSR-funded ($800k total, $200k lab share) in collaboration with Scott Diddams at CU Boulder. Recent results published in Nature Photonics (under review).
+      </p>
+      <div class="tags">
+        <span class="tag">AFOSR</span>
+        <span class="tag">CU Boulder</span>
+        <span class="tag">PNT</span>
+      </div>
+    </article>
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.4 / Parametric amplification</div>
+      <h3>A new class of <em>STO-based</em> quantum-limited microwave amplifiers.</h3>
+      <p>
+        Strontium titanate thin films as a paraelectric medium for microwave parametric processes — sidestepping the magnetic sensitivity issues of Josephson-junction amplifiers used by every superconducting-qubit platform today. First demonstration of varactor-based quantum-limited amplification at cryogenic temperatures.
+      </p>
+      <div class="tags">
+        <span class="tag">COEDIT</span>
+        <span class="tag">Bifrost Electronics</span>
+        <span class="tag">Cryogenics</span>
+      </div>
+    </article>
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.5 / Earth observation</div>
+      <h3>Packaged broadband <em>electro-optic dual combs</em> for sensing.</h3>
+      <p>
+        General-purpose RF-photonic dual comb generators for LIDAR, gas spectroscopy, and hyperspectral microwave radiometry. Technical advisory role with Airbus UK and the European Space Agency on photonics-based microwave radiometers.
+      </p>
+      <div class="tags">
+        <span class="tag">COEDIT</span>
+        <span class="tag">ESA · Airbus</span>
+        <span class="tag">Dual combs</span>
+      </div>
+    </article>
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.6 / Biomedical</div>
+      <h3>Microwave <em>radiometry</em> for non-invasive thermometry.</h3>
+      <p>
+        Correlation radiometry for 3D spatial focusing and heterodyne architectures for interference cancellation — for non-invasive core body temperature measurement. Ongoing collaboration with Zoya Popovic's group at CU Boulder; two patent applications.
+      </p>
+      <div class="tags">
+        <span class="tag">CU Boulder</span>
+        <span class="tag">Radiometry</span>
+        <span class="tag">Lumenastra</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="pubs" id="publications">
+  <div class="section-head reveal">
+    <span class="section-num">§ 04</span>
+    <h2 class="section-title">Selected <em>publications</em>.</h2>
+    <span class="section-kicker">Recent work since joining Mines</span>
+  </div>
+
+  <div class="pub-list" id="pubList">
+
+    <article class="pub reveal">
+      <div class="pub-num">P—01</div>
+      <div class="pub-body">
+        <div class="venue">Nature <span class="if">IF 48.5</span></div>
+        <div class="title">Ultrabroadband integrated electro-optic frequency comb in lithium tantalate.</div>
+        <div class="authors">J. Zhang, C. Wang, <em>C. Denney*</em>, J. Riemensberger, G. Lihachev, J. Hu, W. Kao, T. Blesin, N. Kuznetsov, Z. Li, M. Churaev, X. Ou, <strong>G. Santamaria-Botello</strong>, T. J. Kippenberg.</div>
+      </div>
+      <div class="pub-year">2025</div>
+    </article>
+
+    <article class="pub reveal">
+      <div class="pub-num">P—02</div>
+      <div class="pub-body">
+        <div class="venue">Nature Photonics · under review <span class="if">IF 32.9</span></div>
+        <div class="title">An integrated photonic millimeter-wave receiver with sub-ambient noise.</div>
+        <div class="authors">J. Zhang, S. Zheng, J. Cai, <em>C. Denney*</em>, Z. Li, Y. Zhang, X. Ou, <strong>G. Santamaria-Botello</strong>, T. J. Kippenberg. arXiv:2510.06176.</div>
+      </div>
+      <div class="pub-year">2025</div>
+    </article>
+
+    <article class="pub reveal">
+      <div class="pub-num">P—03</div>
+      <div class="pub-body">
+        <div class="venue">J. Lightwave Technology · accepted <span class="if">IF 4.8</span></div>
+        <div class="title">Photonic generation and free-space distribution of millimeter waves for portable optical clocks.</div>
+        <div class="authors">D. Meyer, A. Lind, W. Groman, H. Trent, C. Mashburn, M. Heyrich, J. Sherman, F. Quinlan, <strong>G. Santamaria-Botello</strong>, S. A. Diddams. arXiv:2511.21955.</div>
+      </div>
+      <div class="pub-year">2025</div>
+    </article>
+
+    <article class="pub reveal">
+      <div class="pub-num">P—04</div>
+      <div class="pub-body">
+        <div class="venue">Optics Express <span class="if">IF 3.3</span></div>
+        <div class="title">Multichannel upconversion of terahertz radiation in an optical disk resonator.</div>
+        <div class="authors">M. I. Suresh, F. Sedlmeir, D. W. Vogt, <strong>G. Santamaria-Botello</strong>, D. V. Strekalov, H. G. L. Schwefel.</div>
+      </div>
+      <div class="pub-year">2025</div>
+    </article>
+
+    <article class="pub reveal">
+      <div class="pub-num">P—05</div>
+      <div class="pub-body">
+        <div class="venue">IEEE JERM in Med. & Biology <span class="if">IF 3.2</span></div>
+        <div class="title">Classification of multi-layer tissue-mimicking dielectric stacks from 2 to 20 GHz.</div>
+        <div class="authors">R. Streeter, J. Lee, <strong>G. Santamaria-Botello</strong>, Z. Popovic.</div>
+      </div>
+      <div class="pub-year">2025</div>
+    </article>
+
+    <article class="pub reveal">
+      <div class="pub-num">P—06</div>
+      <div class="pub-body">
+        <div class="venue">Physical Review D <span class="if">IF 5.3</span></div>
+        <div class="title">Fully metallic geodesic lenses as analog electromagnetic models of static and spherically symmetric gravitational fields.</div>
+        <div class="authors">E. Falcón-Gómez, V. De Falco, K. A. Abdalmalak, A. Amor-Martín, V. De La Rubia, <strong>G. Santamaria-Botello</strong>, L. E. García Muñoz.</div>
+      </div>
+      <div class="pub-year">2024</div>
+    </article>
+
+    <article class="pub reveal">
+      <div class="pub-num">P—07</div>
+      <div class="pub-body">
+        <div class="venue">IEEE Trans. Microwave Theory & Techn. <span class="if">IF 4.5</span></div>
+        <div class="title">A 1.4-GHz GaAs MMIC radiometer for noninvasive internal body thermometry.</div>
+        <div class="authors">J. Lee, <strong>G. Santamaria-Botello</strong>, R. Streeter, Z. Popovic.</div>
+      </div>
+      <div class="pub-year">2024</div>
+    </article>
+
+    <article class="pub reveal">
+      <div class="pub-num">P—08</div>
+      <div class="pub-body">
+        <div class="venue">IEEE Trans. Microwave Theory & Techn. <span class="if">IF 4.5</span></div>
+        <div class="title">Resonant structures for sensitivity enhancement of Rydberg-atom microwave receivers.</div>
+        <div class="authors">G. Sandidge, <strong>G. Santamaria-Botello</strong>, E. Bottomley, H. Fan, Z. Popovic.</div>
+      </div>
+      <div class="pub-year">2024</div>
+    </article>
+
+  </div>
+
+  <div class="pub-toggle reveal">
+    <a class="btn" href="https://scholar.google.com/citations?user=" target="_blank" rel="noopener" style="border:1px solid var(--ink);color:var(--ink)">
+      <span>Full list on Google Scholar</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- INVITED TALKS -->
+<section class="talks" id="talks">
+  <div class="section-head reveal">
+    <span class="section-num">§ 05</span>
+    <h2 class="section-title">Invited <em>talks</em>.</h2>
+    <span class="section-kicker">Recent international &amp; technical advisory engagements</span>
+  </div>
+
+  <div class="talks-list">
+
+    <article class="talk invited reveal">
+      <div class="talk-year">2026</div>
+      <div class="talk-body">
+        <span class="talk-flag">★ Invited</span>
+        <div class="talk-title">Opportunities and challenges of integrated photonics for microwave frontends.</div>
+        <div class="talk-venue">PREIN WP3 Integrated Photonics Workshop</div>
+      </div>
+      <div class="talk-location">Tampere<span class="country">Finland</span></div>
+    </article>
+
+    <article class="talk invited reveal">
+      <div class="talk-year">2026</div>
+      <div class="talk-body">
+        <span class="talk-flag">★ Session Organizer</span>
+        <div class="talk-title">Antenna Miniaturization Techniques — technical session.</div>
+        <div class="talk-venue">ACES 2026 — Applied Computational Electromagnetics Society</div>
+      </div>
+      <div class="talk-location">Greece<span class="country">May 2026</span></div>
+    </article>
+
+    <article class="talk invited reveal">
+      <div class="talk-year">2025</div>
+      <div class="talk-body">
+        <span class="talk-flag">★ Invited</span>
+        <div class="talk-title">Fully photonic-integrated low-noise microwave receiver frontends.</div>
+        <div class="talk-venue">ANZCOP 2025 — Australian and New Zealand Conference on Optics and Photonics</div>
+      </div>
+      <div class="talk-location">Auckland<span class="country">New Zealand</span></div>
+    </article>
+
+    <article class="talk invited reveal">
+      <div class="talk-year">2025</div>
+      <div class="talk-body">
+        <span class="talk-flag">★ Invited</span>
+        <div class="talk-title">Electrooptic parametric circuits as low-noise millimeter-wave receivers.</div>
+        <div class="talk-venue">SPIE Photonics West 2025</div>
+      </div>
+      <div class="talk-location">San Francisco<span class="country">United States</span></div>
+    </article>
+
+    <article class="talk reveal">
+      <div class="talk-year">2025</div>
+      <div class="talk-body">
+        <div class="talk-title">Fundamental limitations of electro-optic electrically small antennas.</div>
+        <div class="talk-venue">PIERS 2025 — Progress In Electromagnetics Research Symposium</div>
+      </div>
+      <div class="talk-location">Chiba<span class="country">Japan</span></div>
+    </article>
+
+    <article class="talk reveal">
+      <div class="talk-year">2025</div>
+      <div class="talk-body">
+        <div class="talk-title">Traveling-wave parametric amplifiers on strontium titanate.</div>
+        <div class="talk-venue">PIERS 2025 · presented by Connor Denney</div>
+      </div>
+      <div class="talk-location">Chiba<span class="country">Japan</span></div>
+    </article>
+
+    <article class="talk reveal">
+      <div class="talk-year">2024</div>
+      <div class="talk-body">
+        <div class="talk-title">Efficiency and radiative cooling tradeoffs in integrated electro-optic THz radiometers.</div>
+        <div class="talk-venue">IRMMW-THz 2024 — 49th Int'l Conference on Infrared, Millimeter, and Terahertz Waves</div>
+      </div>
+      <div class="talk-location">—<span class="country">Sep 2024</span></div>
+    </article>
+
+    <article class="talk reveal">
+      <div class="talk-year">2024</div>
+      <div class="talk-body">
+        <div class="talk-title">Photonic-integrated modulators as millimeter and submillimeter-wave hyperspectral receivers with no pre-amplification.</div>
+        <div class="talk-venue">USNC-URSI National Radio Science Meeting</div>
+      </div>
+      <div class="talk-location">Boulder, CO<span class="country">United States</span></div>
+    </article>
+
+  </div>
+
+  <div class="pub-toggle reveal" style="margin-top:48px">
+    <span style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding:10px 0">
+      Technical advisory: European Space Agency · Airbus UK · Bifrost Electronics
+    </span>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="section-head reveal">
+    <span class="section-num">§ 06</span>
+    <h2 class="section-title">The <em>team</em>.</h2>
+    <span class="section-kicker">Students at Mines, NIST, CU Boulder</span>
+  </div>
+
+  <div class="team-grid">
+    <div class="person pi reveal">
+      <span class="glyph"></span>
+      <div class="role">Principal Investigator</div>
+      <div class="name">Gabriel Santamaria-Botello</div>
+      <div class="detail">Assistant Professor, EE. PhD Universidad Carlos III de Madrid.</div>
+    </div>
+
+    <div class="person reveal">
+      <span class="glyph"></span>
+      <div class="role">PhD · 2028</div>
+      <div class="name">Connor Denney</div>
+      <div class="detail">Photonic ICs &amp; STO parametric amplifiers. Founder, Bifrost Electronics. Co-author on Nature 2025.</div>
+    </div>
+
+    <div class="person reveal">
+      <span class="glyph"></span>
+      <div class="role">PhD · 2029</div>
+      <div class="name">Steffen Kross</div>
+      <div class="detail">Fully photonic mm-wave receivers · AFOSR &amp; DARPA HARQ.</div>
+    </div>
+
+    <div class="person reveal">
+      <span class="glyph"></span>
+      <div class="role">PhD · 2029</div>
+      <div class="name">Lisa Elmiladi</div>
+      <div class="detail">Packaged electro-optic dual combs · COEDIT &amp; DARPA.</div>
+    </div>
+
+    <div class="person reveal">
+      <span class="glyph"></span>
+      <div class="role">MSc · EE 2026</div>
+      <div class="name">Ethan Hansen</div>
+      <div class="detail">NIST PREP fellow.</div>
+    </div>
+
+    <div class="person reveal">
+      <span class="glyph"></span>
+      <div class="role">MSc · Quantum Eng. 2025</div>
+      <div class="name">Evan Burger</div>
+      <div class="detail">NIST PREP fellow.</div>
+    </div>
+
+    <div class="person reveal">
+      <span class="glyph"></span>
+      <div class="role">Undergraduate · MURF</div>
+      <div class="name">Trevor Lewis</div>
+      <div class="detail">Microwave radiometry hardware.</div>
+    </div>
+
+    <div class="person reveal">
+      <span class="glyph"></span>
+      <div class="role">Co-advised · CU Boulder</div>
+      <div class="name">Joseph Dunbar &amp; Georgia Sandidge</div>
+      <div class="detail">PhD students · radiometry &amp; Rydberg-atom microwave sensing.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING -->
+<section class="teaching" id="teaching">
+  <div class="section-head reveal">
+    <span class="section-num">§ 07</span>
+    <h2 class="section-title"><em>Teaching</em>.</h2>
+    <span class="section-kicker">Electrical &amp; Quantum Engineering at Mines</span>
+  </div>
+
+  <div class="courses">
+    <div class="course reveal">
+      <div class="course-code">EENG 430/530<span class="level">Graduate / Senior</span></div>
+      <div class="course-title">Passive RF and Microwave Devices <span class="badge">Developed</span></div>
+      <div class="course-desc">Transmission line and network theory through superconducting microwave resonators. Industry-standard CAD design culminating in a fabricated, lab-tested radar frontend. Accessible to Quantum Engineering students with no prior RF background.</div>
+    </div>
+
+    <div class="course reveal">
+      <div class="course-code">EENG 386<span class="level">Sophomore / Junior</span></div>
+      <div class="course-title">Engineering Electromagnetics <span class="badge">Co-developed</span></div>
+      <div class="course-desc">Electrostatics, magnetostatics, electrodynamics, radiation, and an introduction to transmission line theory — restructured as a foundation for EENG 424 and EENG 430/530.</div>
+    </div>
+
+    <div class="course reveal">
+      <div class="course-code">EENG 532<span class="level">Graduate</span></div>
+      <div class="course-title">Low Temperature Microwave Measurements <span class="badge">Contributed</span></div>
+      <div class="course-desc">New laboratory module on characterizing superconducting microwave resonators in a 4 K cryostat — students design their own resonators with target external coupling rates, then fabricate and test them.</div>
+    </div>
+
+    <div class="course reveal">
+      <div class="course-code">EENG 281<span class="level">Sophomore · ~160 students</span></div>
+      <div class="course-title">Introduction to Electrical Circuits, Electronics and Power</div>
+      <div class="course-desc">Foundational circuits with real-world hooks — high-voltage power transmission, Thevenin equivalents in antennas, two-port networks in RF transistor characterization.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / JOIN -->
+<section class="contact" id="join">
+  <div class="contact-bg"></div>
+  <div class="contact-inner">
+    <div>
+      <h2 class="reveal">Join the <em>lab</em>.</h2>
+      <div class="contact-prose reveal">
+        <p>
+          We're looking for curious, technically rigorous students at the intersection of microwave engineering, photonics, and quantum hardware. A PhD position is available for Fall 2026 on the DARPA HARQ program.
+        </p>
+        <p>
+          Prospective PhD applicants: apply to the Mines Electrical Engineering graduate program and mention my name in your statement. Current Mines undergraduates interested in research should email directly.
+        </p>
+      </div>
+      <div class="contact-actions reveal">
+        <a class="btn" href="mailto:gabrielsantamariab@gmail.com">
+          <span>Email the PI</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="btn" href="https://www.mines.edu" target="_blank" rel="noopener">
+          <span>Apply to Mines EE Graduate Program</span>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <aside class="contact-info reveal">
+      <h4>Find us</h4>
+      <dl>
+        <dt>PI</dt><dd>Gabriel Santamaria-Botello</dd>
+        <dt>Email</dt><dd>gabrielsantamariab@gmail.com</dd>
+        <dt>Dept.</dt><dd>Electrical Engineering<br/>Colorado School of Mines</dd>
+        <dt>City</dt><dd>Golden, Colorado</dd>
+        <dt>Phone</dt><dd>+1 (720) 742-4869</dd>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 · Microwave Photonics Lab · Colorado School of Mines</div>
+  <div>gsant.phd</div>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Reveal on scroll with stagger
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        // small stagger when entering groups
+        const idx = Array.from(el.parentElement?.children || []).indexOf(el);
+        el.style.transitionDelay = Math.min(idx * 60, 360) + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      }
+    });
+  }, {threshold: 0.12, rootMargin: '0px 0px -40px 0px'});
+  reveals.forEach(r => io.observe(r));
+</script>
+
+</body>
+</html>
