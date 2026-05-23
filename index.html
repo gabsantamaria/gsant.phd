@@ -584,11 +584,11 @@
     gap:20px;
   }
   .person{
+    padding:24px;
     background:var(--paper);
     border:1px solid rgba(11,15,20,.1);
     transition:transform .25s ease, box-shadow .25s ease;
     position:relative;
-    overflow:hidden;
     display:flex;flex-direction:column;
   }
   .person:hover{
@@ -597,10 +597,12 @@
   }
   .person .photo{
     width:100%;
-    aspect-ratio:4 / 5;
+    aspect-ratio:1 / 1;
     object-fit:cover;
     object-position:center top;
     display:block;
+    border-radius:14px;
+    margin-bottom:20px;
     background:var(--paper-2);
     filter:grayscale(15%);
     transition:filter .3s ease;
@@ -612,29 +614,30 @@
     letter-spacing:.18em;
     text-transform:uppercase;
     color:var(--accent);
-    margin:24px 24px 14px;
+    margin-bottom:14px;
   }
   .person .name{
     font-family:var(--serif);
     font-size:22px;
     font-weight:400;
     line-height:1.2;
-    margin:0 24px 8px;
+    margin-bottom:8px;
   }
   .person .detail{
     font-size:13px;
     color:var(--mute);
     line-height:1.5;
-    margin:0 24px 28px;
   }
-  /* fallback banner = colored panel with initial, for people without a photo */
+  /* fallback square = colored panel with initial, for people without a photo */
   .person .glyph{
     width:100%;
-    aspect-ratio:4 / 5;
+    aspect-ratio:1 / 1;
+    border-radius:14px;
+    margin-bottom:20px;
     background:radial-gradient(circle at 35% 30%, var(--accent), #8a2c11);
     display:flex;align-items:center;justify-content:center;
     font-family:var(--serif);
-    font-size:72px;
+    font-size:64px;
     color:var(--paper);
   }
   .person.pi .glyph{background:radial-gradient(circle at 35% 30%, var(--accent-3), #6d5520)}
