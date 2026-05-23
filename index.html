@@ -345,7 +345,7 @@
     padding:40px 32px;
     position:relative;
     transition:background .3s ease;
-    min-height:380px;
+    min-height:260px;
     display:flex;flex-direction:column;
   }
   .research-card:hover{background:var(--ink-2)}
@@ -594,6 +594,16 @@
     transform:translateY(-3px);
     box-shadow:0 18px 40px -18px rgba(11,15,20,.25);
   }
+  .person .photo{
+    width:72px;height:72px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:18px;
+    border:2px solid rgba(11,15,20,.1);
+    background:var(--paper-2);
+    display:block;
+  }
+  .person.pi .photo{border-color:var(--accent-3)}
   .person .role{
     font-family:var(--mono);
     font-size:10px;
@@ -614,13 +624,17 @@
     color:var(--mute);
     line-height:1.5;
   }
+  /* fallback avatar = colored disc with initial, for people without a photo */
   .person .glyph{
-    position:absolute;
-    top:24px;right:24px;
-    width:24px;height:24px;
+    width:72px;height:72px;
     border-radius:50%;
+    margin-bottom:18px;
     background:radial-gradient(circle at 30% 30%, var(--accent), #8a2c11);
-    opacity:.85;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);
+    font-size:28px;
+    color:var(--paper);
+    opacity:.92;
   }
   .person.pi .glyph{background:radial-gradient(circle at 30% 30%, var(--accent-3), #6d5520)}
 
@@ -634,11 +648,11 @@
   }
   .course{
     display:grid;
-    grid-template-columns:140px 1fr 1.2fr;
+    grid-template-columns:200px 1fr;
     gap:48px;
-    padding:36px 0;
+    padding:32px 0;
     border-bottom:1px solid rgba(11,15,20,.12);
-    align-items:start;
+    align-items:center;
   }
   .course:first-child{border-top:1px solid rgba(11,15,20,.12)}
   .course-code{
@@ -1062,6 +1076,28 @@
     gap:32px;
     padding:0 12px;
   }
+  .partners-stat{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+    padding-right:8px;
+  }
+  .partners-stat .ps-big{
+    font-family:var(--serif);
+    font-size:44px;
+    font-weight:400;
+    letter-spacing:-.02em;
+    color:var(--accent);
+  }
+  .partners-stat .ps-lab{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--mute);
+    margin-top:8px;
+    line-height:1.4;
+  }
   .partners-row img{
     height:56px;
     width:auto;
@@ -1079,6 +1115,8 @@
   @media (max-width:640px){
     .partners-row{gap:28px 40px;justify-content:center}
     .partners-row img{height:42px}
+    .partners-stat{align-items:center;text-align:center;width:100%}
+    .partners-stat .ps-big{font-size:38px}
   }
 
   /* ---------- ANIMATIONS ---------- */
@@ -1099,9 +1137,9 @@
     <span>Microwave Photonics Lab</span>
   </a>
   <div class="nav-links">
+    <a href="#research">Research</a>
     <a href="#about">About</a>
     <a href="#news">News</a>
-    <a href="#research">Research</a>
     <a href="#publications">Publications</a>
     <a href="#talks">Talks</a>
     <a href="#team">Team</a>
@@ -1187,11 +1225,76 @@
   </div>
 </header>
 
+<!-- RESEARCH -->
+<section class="research" id="research">
+  <div class="section-head reveal">
+    <span class="section-num">§ 01</span>
+    <h2 class="section-title">Research <em>thrusts</em>.</h2>
+    <span class="section-kicker">From kHz to optical · classical and quantum</span>
+  </div>
+
+  <div class="research-grid">
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.1 / Photonic integrated circuits</div>
+      <h3>Frequency-agile <em>RF sensors</em> beyond the Chu–Wheeler–Harrington limit.</h3>
+      <p>
+        Electro-optic transducers covering kHz to tens of GHz in an ultra-compact footprint that breaks the fundamental limitations of electrically small antennas.
+      </p>
+    </article>
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.2 / Quantum networks</div>
+      <h3>Microwave-to-optical <em>quantum transducers</em>.</h3>
+      <p>
+        Lithium tantalate photonic integrated circuits for heterogeneous quantum computing networks.
+      </p>
+    </article>
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.3 / Precision timing</div>
+      <h3>Fully photonic <em>mm-wave receivers</em> for optical atomic clocks.</h3>
+      <p>
+        Synchronizing remote optical atomic clocks for positioning, navigation, and timing applications.
+      </p>
+    </article>
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.4 / Parametric amplification</div>
+      <h3>A new class of <em>STO-based</em> quantum-limited microwave amplifiers.</h3>
+      <p>
+        Strontium titanate thin films as a paraelectric medium for microwave parametric processes — sidestepping the magnetic sensitivity issues of Josephson-junction amplifiers used by every superconducting-qubit platform today. First demonstration of varactor-based quantum-limited amplification at cryogenic temperatures.
+      </p>
+    </article>
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.5 / Earth observation</div>
+      <h3>Packaged broadband <em>electro-optic dual combs</em> for sensing.</h3>
+      <p>
+        General-purpose RF-photonic dual comb generators for LIDAR, gas spectroscopy, and hyperspectral microwave radiometry.
+      </p>
+    </article>
+
+    <article class="research-card reveal">
+      <div class="rc-num">2.6 / Biomedical</div>
+      <h3>Microwave <em>radiometry</em> for non-invasive thermometry.</h3>
+      <p>
+        Correlation radiometry for 3D spatial focusing and heterodyne architectures for interference cancellation — for non-invasive core body temperature measurement.
+      </p>
+    </article>
+
+  </div>
+</section>
+
 <!-- FUNDING & PARTNERS -->
 <section class="partners reveal">
   <div class="partners-inner">
     <div class="partners-label">Funding &amp; Partners</div>
     <div class="partners-row">
+      <div class="partners-stat">
+        <span class="ps-big">$1.65M</span>
+        <span class="ps-lab">External funding secured<br/>(Mines lab share)</span>
+      </div>
       <img src="darpa.png" alt="DARPA" />
       <img src="afosr.png" alt="Air Force Office of Scientific Research" />
       <img src="ussf.png" alt="United States Space Force" />
@@ -1203,7 +1306,7 @@
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="section-head reveal">
-    <span class="section-num">§ 01</span>
+    <span class="section-num">§ 02</span>
     <h2 class="section-title">The <em>PI</em>.</h2>
     <span class="section-kicker">Gabriel Santamaria-Botello, PhD</span>
   </div>
@@ -1223,46 +1326,10 @@
   </div>
 </section>
 
-<!-- NUMBERS / FUNDING -->
-<section class="numbers">
-  <div class="numbers-grid single">
-    <div class="num-item reveal">
-      <div class="big">$<em>1.65</em>M</div>
-      <div class="lab">External funding secured (Mines lab share)</div>
-    </div>
-  </div>
-
-  <div class="funders reveal">
-    <div class="funders-label">Supported by</div>
-    <div class="funders-strip">
-      <div class="logo-plate" title="Defense Advanced Research Projects Agency">
-        <span class="lp-mark">DARPA</span>
-        <span class="lp-sub">Defense Advanced Research Projects Agency</span>
-      </div>
-      <div class="logo-plate" title="Air Force Office of Scientific Research">
-        <span class="lp-mark">AFOSR</span>
-        <span class="lp-sub">Air Force Office of Scientific Research</span>
-      </div>
-      <div class="logo-plate" title="United States Space Force">
-        <span class="lp-mark">USSF</span>
-        <span class="lp-sub">United States Space Force</span>
-      </div>
-      <div class="logo-plate" title="Colorado Office of Economic Development and International Trade">
-        <span class="lp-mark">COEDIT</span>
-        <span class="lp-sub">Colorado Office of Economic Development &amp; Int'l Trade</span>
-      </div>
-      <div class="logo-plate" title="Bifrost Electronics">
-        <span class="lp-mark">BIFROST</span>
-        <span class="lp-sub">Bifrost Electronics · Lab Spinout</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- NEWS & HIGHLIGHTS -->
 <section class="news" id="news">
   <div class="section-head reveal">
-    <span class="section-num">§ 02</span>
+    <span class="section-num">§ 03</span>
     <h2 class="section-title">News &amp; <em>highlights</em>.</h2>
     <span class="section-kicker">Recent milestones from the lab</span>
   </div>
@@ -1319,97 +1386,6 @@
       </article>
 
     </div>
-
-  </div>
-</section>
-
-<!-- RESEARCH -->
-<section class="research" id="research">
-  <div class="section-head reveal">
-    <span class="section-num">§ 03</span>
-    <h2 class="section-title">Research <em>thrusts</em>.</h2>
-    <span class="section-kicker">From kHz to optical · classical and quantum</span>
-  </div>
-
-  <div class="research-grid">
-
-    <article class="research-card reveal">
-      <div class="rc-num">2.1 / Photonic integrated circuits</div>
-      <h3>Frequency-agile <em>RF sensors</em> beyond the Chu–Wheeler–Harrington limit.</h3>
-      <p>
-        Electro-optic transducers covering kHz to tens of GHz in an ultra-compact footprint that breaks the fundamental limitations of electrically small antennas. Sole performer on a $945k DARPA program; continuation under negotiation with the U.S. Space Force.
-      </p>
-      <div class="tags">
-        <span class="tag">DARPA</span>
-        <span class="tag">USSF</span>
-        <span class="tag">Electrically small antennas</span>
-      </div>
-    </article>
-
-    <article class="research-card reveal">
-      <div class="rc-num">2.2 / Quantum networks</div>
-      <h3>Microwave-to-optical <em>quantum transducers</em>.</h3>
-      <p>
-        Lithium tantalate photonic integrated circuits for heterogeneous quantum computing networks. One of 19 performers selected in the $1.65M DARPA HARQ program, in partnership with Kippenberg's group at EPFL.
-      </p>
-      <div class="tags">
-        <span class="tag">DARPA HARQ</span>
-        <span class="tag">EPFL</span>
-        <span class="tag">LiTaO₃</span>
-      </div>
-    </article>
-
-    <article class="research-card reveal">
-      <div class="rc-num">2.3 / Precision timing</div>
-      <h3>Fully photonic <em>mm-wave receivers</em> for optical atomic clocks.</h3>
-      <p>
-        Synchronizing remote optical atomic clocks for positioning, navigation, and timing applications. AFOSR-funded ($800k total, $200k lab share) in collaboration with Scott Diddams at CU Boulder. Recent results published in Nature Photonics (under review).
-      </p>
-      <div class="tags">
-        <span class="tag">AFOSR</span>
-        <span class="tag">CU Boulder</span>
-        <span class="tag">PNT</span>
-      </div>
-    </article>
-
-    <article class="research-card reveal">
-      <div class="rc-num">2.4 / Parametric amplification</div>
-      <h3>A new class of <em>STO-based</em> quantum-limited microwave amplifiers.</h3>
-      <p>
-        Strontium titanate thin films as a paraelectric medium for microwave parametric processes — sidestepping the magnetic sensitivity issues of Josephson-junction amplifiers used by every superconducting-qubit platform today. First demonstration of varactor-based quantum-limited amplification at cryogenic temperatures.
-      </p>
-      <div class="tags">
-        <span class="tag">COEDIT</span>
-        <span class="tag">Bifrost Electronics</span>
-        <span class="tag">Cryogenics</span>
-      </div>
-    </article>
-
-    <article class="research-card reveal">
-      <div class="rc-num">2.5 / Earth observation</div>
-      <h3>Packaged broadband <em>electro-optic dual combs</em> for sensing.</h3>
-      <p>
-        General-purpose RF-photonic dual comb generators for LIDAR, gas spectroscopy, and hyperspectral microwave radiometry. Technical advisory role with Airbus UK and the European Space Agency on photonics-based microwave radiometers.
-      </p>
-      <div class="tags">
-        <span class="tag">COEDIT</span>
-        <span class="tag">ESA · Airbus</span>
-        <span class="tag">Dual combs</span>
-      </div>
-    </article>
-
-    <article class="research-card reveal">
-      <div class="rc-num">2.6 / Biomedical</div>
-      <h3>Microwave <em>radiometry</em> for non-invasive thermometry.</h3>
-      <p>
-        Correlation radiometry for 3D spatial focusing and heterodyne architectures for interference cancellation — for non-invasive core body temperature measurement. Ongoing collaboration with Zoya Popovic's group at CU Boulder; two patent applications.
-      </p>
-      <div class="tags">
-        <span class="tag">CU Boulder</span>
-        <span class="tag">Radiometry</span>
-        <span class="tag">Lumenastra</span>
-      </div>
-    </article>
 
   </div>
 </section>
@@ -1614,65 +1590,52 @@
   <div class="section-head reveal">
     <span class="section-num">§ 06</span>
     <h2 class="section-title">The <em>team</em>.</h2>
-    <span class="section-kicker">Students at Mines, NIST, CU Boulder</span>
+    <span class="section-kicker">Students at Mines &amp; NIST</span>
   </div>
 
   <div class="team-grid">
     <div class="person pi reveal">
-      <span class="glyph"></span>
+      <img class="photo" src="gabriel.jpg" alt="Gabriel Santamaria-Botello" />
       <div class="role">Principal Investigator</div>
       <div class="name">Gabriel Santamaria-Botello</div>
       <div class="detail">Assistant Professor, EE. PhD Universidad Carlos III de Madrid.</div>
     </div>
 
     <div class="person reveal">
-      <span class="glyph"></span>
-      <div class="role">PhD · 2028</div>
+      <img class="photo" src="connor.webp" alt="Connor Denney" />
+      <div class="role">PhD</div>
       <div class="name">Connor Denney</div>
       <div class="detail">Photonic ICs &amp; STO parametric amplifiers. Founder, Bifrost Electronics. Co-author on Nature 2025.</div>
     </div>
 
     <div class="person reveal">
-      <span class="glyph"></span>
-      <div class="role">PhD · 2029</div>
+      <img class="photo" src="steffen.webp" alt="Steffen Kross" />
+      <div class="role">PhD</div>
       <div class="name">Steffen Kross</div>
       <div class="detail">Fully photonic mm-wave receivers · AFOSR &amp; DARPA HARQ.</div>
     </div>
 
     <div class="person reveal">
-      <span class="glyph"></span>
-      <div class="role">PhD · 2029</div>
+      <img class="photo" src="lisa.jpg" alt="Lisa Elmiladi" />
+      <div class="role">PhD</div>
       <div class="name">Lisa Elmiladi</div>
       <div class="detail">Packaged electro-optic dual combs · COEDIT &amp; DARPA.</div>
     </div>
 
     <div class="person reveal">
-      <span class="glyph"></span>
-      <div class="role">MSc · EE 2026</div>
+      <img class="photo" src="ethan.jpg" alt="Ethan Hansen" />
+      <div class="role">MSc · EE</div>
       <div class="name">Ethan Hansen</div>
       <div class="detail">NIST PREP fellow.</div>
     </div>
 
     <div class="person reveal">
-      <span class="glyph"></span>
-      <div class="role">MSc · Quantum Eng. 2025</div>
-      <div class="name">Evan Burger</div>
-      <div class="detail">NIST PREP fellow.</div>
+      <img class="photo" src="cameron.webp" alt="Cameron Connolly-Hergert" />
+      <div class="role">Undergraduate Researcher</div>
+      <div class="name">Cameron Connolly-Hergert</div>
+      <div class="detail">Co-author, APS March Meeting 2026.</div>
     </div>
 
-    <div class="person reveal">
-      <span class="glyph"></span>
-      <div class="role">Undergraduate · MURF</div>
-      <div class="name">Trevor Lewis</div>
-      <div class="detail">Microwave radiometry hardware.</div>
-    </div>
-
-    <div class="person reveal">
-      <span class="glyph"></span>
-      <div class="role">Co-advised · CU Boulder</div>
-      <div class="name">Joseph Dunbar &amp; Georgia Sandidge</div>
-      <div class="detail">PhD students · radiometry &amp; Rydberg-atom microwave sensing.</div>
-    </div>
   </div>
 </section>
 
@@ -1686,27 +1649,23 @@
 
   <div class="courses">
     <div class="course reveal">
-      <div class="course-code">EENG 430/530<span class="level">Graduate / Senior</span></div>
-      <div class="course-title">Passive RF and Microwave Devices <span class="badge">Developed</span></div>
-      <div class="course-desc">Transmission line and network theory through superconducting microwave resonators. Industry-standard CAD design culminating in a fabricated, lab-tested radar frontend. Accessible to Quantum Engineering students with no prior RF background.</div>
+      <div class="course-code">EENG 430/530<span class="level">2024 – 2025</span></div>
+      <div class="course-title">Passive RF and Microwave Devices</div>
     </div>
 
     <div class="course reveal">
-      <div class="course-code">EENG 386<span class="level">Sophomore / Junior</span></div>
-      <div class="course-title">Engineering Electromagnetics <span class="badge">Co-developed</span></div>
-      <div class="course-desc">Electrostatics, magnetostatics, electrodynamics, radiation, and an introduction to transmission line theory — restructured as a foundation for EENG 424 and EENG 430/530.</div>
+      <div class="course-code">EENG 386<span class="level">2024</span></div>
+      <div class="course-title">Engineering Electromagnetics</div>
     </div>
 
     <div class="course reveal">
-      <div class="course-code">EENG 532<span class="level">Graduate</span></div>
-      <div class="course-title">Low Temperature Microwave Measurements <span class="badge">Contributed</span></div>
-      <div class="course-desc">New laboratory module on characterizing superconducting microwave resonators in a 4 K cryostat — students design their own resonators with target external coupling rates, then fabricate and test them.</div>
+      <div class="course-code">EENG 532<span class="level">Fall 2024</span></div>
+      <div class="course-title">Low Temperature Microwave Measurements</div>
     </div>
 
     <div class="course reveal">
-      <div class="course-code">EENG 281<span class="level">Sophomore · ~160 students</span></div>
+      <div class="course-code">EENG 281<span class="level">Spring 2025</span></div>
       <div class="course-title">Introduction to Electrical Circuits, Electronics and Power</div>
-      <div class="course-desc">Foundational circuits with real-world hooks — high-voltage power transmission, Thevenin equivalents in antennas, two-port networks in RF transistor characterization.</div>
     </div>
   </div>
 </section>
@@ -1719,20 +1678,13 @@
       <h2 class="reveal">Join the <em>lab</em>.</h2>
       <div class="contact-prose reveal">
         <p>
-          We're looking for curious, technically rigorous students at the intersection of microwave engineering, photonics, and quantum hardware. A PhD position is available for Fall 2026 on the DARPA HARQ program.
-        </p>
-        <p>
-          Prospective PhD applicants: apply to the Mines Electrical Engineering graduate program and mention my name in your statement. Current Mines undergraduates interested in research should email directly.
+          We are looking for a postdoctoral researcher to work on microwave-to-optical quantum transduction for next-generation quantum computing systems. Backgrounds in microwave engineering, superconducting circuits, photonics, or quantum optics are encouraged to apply.
         </p>
       </div>
       <div class="contact-actions reveal">
         <a class="btn" href="mailto:gabrielsantamariab@gmail.com">
-          <span>Email the PI</span>
+          <span>Email to apply</span>
           <span class="arrow">→</span>
-        </a>
-        <a class="btn" href="https://www.mines.edu" target="_blank" rel="noopener">
-          <span>Apply to Mines EE Graduate Program</span>
-          <span class="arrow">↗</span>
         </a>
       </div>
     </div>
@@ -1744,7 +1696,6 @@
         <dt>Email</dt><dd>gabrielsantamariab@gmail.com</dd>
         <dt>Dept.</dt><dd>Electrical Engineering<br/>Colorado School of Mines</dd>
         <dt>City</dt><dd>Golden, Colorado</dd>
-        <dt>Phone</dt><dd>+1 (720) 742-4869</dd>
       </dl>
     </aside>
   </div>
