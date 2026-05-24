@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Microwave Photonics Lab - Gabriel Santamaria-Botello</title>
-<meta name="description" content="Microwave Photonics Lab at Colorado School of Mines. PI: Gabriel Santamaria-Botello. Integrated photonics for classical and quantum microwave sensors." />
+<title>Microwave & Photonics Lab - Gabriel Santamaria-Botello</title>
+<meta name="description" content="Microwave & Photonics Lab at Colorado School of Mines. PI: Gabriel Santamaria-Botello. Integrated photonics for classical and quantum microwave sensors." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -248,6 +248,7 @@
     max-width:300px;
     text-align:right;
   }
+  .section-kicker .nocaps{text-transform:none}
 
   /* ---------- ABOUT ---------- */
   .about{
@@ -1077,6 +1078,28 @@
     font-weight:400;
     margin-bottom:6px;
   }
+  .talk-body .talk-title a{
+    color:inherit;
+    text-decoration:none;
+    background-image:linear-gradient(var(--accent), var(--accent));
+    background-size:0% 1px;
+    background-repeat:no-repeat;
+    background-position:left 90%;
+    transition:background-size .3s ease, color .25s ease;
+  }
+  .talk-body .talk-title a:hover{
+    color:var(--accent);
+    background-size:100% 1px;
+  }
+  .talk-body .talk-title a::after{
+    content:" \2197";
+    font-size:.7em;
+    color:var(--mute);
+    vertical-align:super;
+    opacity:0;
+    transition:opacity .25s ease;
+  }
+  .talk-body .talk-title a:hover::after{opacity:.8}
   .talk-body .talk-venue{
     font-size:13px;
     color:var(--mute);
@@ -1135,6 +1158,57 @@
     gap:32px;
     padding:0 12px;
   }
+  .partners-group{
+    margin-top:8px;
+  }
+  .partners-group + .partners-group{
+    margin-top:48px;
+    padding-top:44px;
+    border-top:1px solid rgba(11,15,20,.1);
+  }
+  .partners-sublabel{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--mute);
+    text-align:center;
+    margin-bottom:30px;
+  }
+  .partners-logos{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:40px 56px;
+  }
+  .partners-logos img{
+    height:54px;
+    width:auto;
+    max-width:190px;
+    object-fit:contain;
+    filter:grayscale(100%);
+    opacity:.55;
+    transition:filter .3s ease, opacity .3s ease, transform .3s ease;
+  }
+  .partners-logos img:hover{
+    filter:grayscale(0%);
+    opacity:1;
+    transform:translateY(-3px);
+  }
+  .partners-fund{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:40px 56px;
+  }
+  .partners-fund .partners-stat{padding-right:0}
+  @media (max-width:640px){
+    .partners-logos{gap:28px 36px}
+    .partners-logos img{height:40px}
+    .partners-fund{gap:24px 36px}
+  }
   .partners-stat{
     display:flex;
     flex-direction:column;
@@ -1183,14 +1257,24 @@
     background:var(--paper);
   }
   .gallery-grid{
-    max-width:1300px;margin:0 auto;
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:28px;
+    display:flex;
+    gap:24px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    padding:8px 36px 28px;
+    scroll-padding-left:36px;
   }
+  .gallery-grid::-webkit-scrollbar{height:8px}
+  .gallery-grid::-webkit-scrollbar-track{background:rgba(11,15,20,.06);border-radius:99px}
+  .gallery-grid::-webkit-scrollbar-thumb{background:rgba(11,15,20,.22);border-radius:99px}
+  .gallery-grid::-webkit-scrollbar-thumb:hover{background:rgba(11,15,20,.4)}
   .gallery-grid figure{
     margin:0;
     position:relative;
+    flex:0 0 auto;
+    width:300px;
+    scroll-snap-align:start;
     overflow:hidden;
     border-radius:12px;
     background:var(--paper-2);
@@ -1228,14 +1312,9 @@
     transition:opacity .3s ease;
   }
   .gallery-grid figure:hover figcaption{opacity:1}
-  /* tablets: 2 x 2 */
-  @media (max-width:880px){
-    .gallery-grid{grid-template-columns:repeat(2, 1fr);gap:20px}
-  }
-  /* phones: single column */
-  @media (max-width:480px){
-    .gallery-grid{grid-template-columns:1fr}
-    .gallery-grid figure{aspect-ratio:4 / 3}
+  @media (max-width:600px){
+    .gallery-grid{padding:8px 20px 24px;scroll-padding-left:20px;gap:16px}
+    .gallery-grid figure{width:74vw;max-width:300px}
   }
 
   /* ---------- CONSOLIDATED PHONE FIXES ---------- */
@@ -1273,7 +1352,7 @@
 <nav class="nav" id="nav">
   <a href="#top" class="brand">
     <span class="brand-dot"></span>
-    <span>Microwave Photonics Lab</span>
+    <span>Microwave & Photonics Lab</span>
   </a>
   <div class="nav-links">
     <a href="#research">Research</a>
@@ -1306,12 +1385,12 @@
 
     <h1 class="hero-title reveal">
       Microwave<br/>
-      <em>×</em> <span class="underline">Photonics</span><br/>
+      <em>&amp;</em> <span class="underline">Photonics</span><br/>
       Lab.
     </h1>
 
     <p class="hero-tagline reveal">
-      We engineer <strong>photonic integrated circuits</strong> that push microwave sensors and transducers beyond the limits of conventional electronics, for quantum computing, precision timekeeping, Earth observation, and electromagnetic warfare.
+      We are microwave engineers developing <strong>low-noise electromagnetic sensors</strong> for quantum computing, Earth observation, remote sensing, and Positioning, Navigation and Timing (PNT). We co-design microwave and photonic integrated circuits to push sensors beyond the limits of conventional analog electronics.
     </p>
 
     <div class="hero-meta reveal">
@@ -1329,7 +1408,7 @@
       </div>
       <div class="hero-meta-item">
         <div class="label">External Funding</div>
-        <div class="value">$1.65M+ as PI (lab share)</div>
+        <div class="value">$1.6M+ (PI share)</div>
       </div>
     </div>
   </div>
@@ -1339,16 +1418,16 @@
 <section class="research" id="research">
   <div class="section-head reveal">
     <h2 class="section-title">Research <em>thrusts</em>.</h2>
-    <span class="section-kicker">From kHz to optical · classical and quantum</span>
+    <span class="section-kicker">From <span class="nocaps">kHz</span> to optical · Classical and quantum sensing</span>
   </div>
 
   <div class="research-grid">
 
     <article class="research-card reveal">
-      <div class="rc-num">2.1 / Photonic integrated circuits</div>
-      <h3>Frequency-agile <em>RF sensors</em> beyond the Chu–Wheeler–Harrington limit.</h3>
+      <div class="rc-num">2.1 / RF sensing</div>
+      <h3>Frequency-agile <em>RF sensors</em>.</h3>
       <p>
-        Electro-optic transducers covering kHz to tens of GHz in an ultra-compact footprint that breaks the fundamental limitations of electrically small antennas.
+        Chip-scale electro-optic microwave sensors from kHz to tens of GHz.
       </p>
     </article>
 
@@ -1356,15 +1435,15 @@
       <div class="rc-num">2.2 / Quantum networks</div>
       <h3>Microwave-to-optical <em>quantum transducers</em>.</h3>
       <p>
-        Lithium tantalate photonic integrated circuits for heterogeneous quantum computing networks.
+        Photonic integrated circuits for heterogeneous quantum computing networks.
       </p>
     </article>
 
     <article class="research-card reveal">
-      <div class="rc-num">2.3 / Precision timing</div>
-      <h3>Fully photonic <em>mm-wave receivers</em> for optical atomic clocks.</h3>
+      <div class="rc-num">2.3 / Positioning, Navigation and Timing</div>
+      <h3>Fully photonic <em>mm-wave receivers</em> for time and frequency transfer.</h3>
       <p>
-        Synchronizing remote optical atomic clocks for positioning, navigation, and timing applications.
+        Synchronizing remote optical atomic clocks for Positioning, Navigation and Timing.
       </p>
     </article>
 
@@ -1398,17 +1477,33 @@
 <!-- FUNDING & PARTNERS -->
 <section class="partners reveal">
   <div class="partners-inner">
-    <div class="partners-label">Funding &amp; Partners</div>
-    <div class="partners-row">
-      <div class="partners-stat">
-        <span class="ps-big">$1.65M</span>
-        <span class="ps-lab">External funding secured<br/>(Mines lab share)</span>
+
+    <div class="partners-group">
+      <div class="partners-sublabel">Funding</div>
+      <div class="partners-fund">
+        <div class="partners-stat">
+          <span class="ps-big">$1.65M</span>
+          <span class="ps-lab">External funding secured<br/>(PI share)</span>
+        </div>
+        <img src="darpa.png" alt="DARPA" />
+        <img src="afosr.png" alt="Air Force Office of Scientific Research" />
+        <img src="coedit.svg" alt="Colorado Office of Economic Development and International Trade" />
       </div>
-      <img src="darpa.png" alt="DARPA" />
-      <img src="afosr.png" alt="Air Force Office of Scientific Research" />
-      <img src="ussf.png" alt="United States Space Force" />
-      <img src="bifrost.png" alt="Bifrost Electronics" />
     </div>
+
+    <div class="partners-group">
+      <div class="partners-sublabel">Partners &amp; Collaborators</div>
+      <div class="partners-logos">
+        <img src="ussf.png" alt="United States Space Force" />
+        <img src="bifrost.png" alt="Bifrost Electronics" />
+        <img src="lumenastra.png" alt="Lumenastra" />
+        <img src="epfl.svg" alt="EPFL" />
+        <img src="cuboulder.svg" alt="University of Colorado Boulder" />
+        <img src="esa.svg" alt="European Space Agency" />
+        <img src="airbus.svg" alt="Airbus" />
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1425,7 +1520,7 @@
     </div>
     <div class="about-prose reveal">
       <p>
-        Gabriel Santamaria-Botello is an Assistant Professor in the Electrical Engineering Department at Colorado School of Mines, where his group develops <span class="highlight">photonic integrated circuit technologies</span> for microwave receivers, transceivers, and sensing systems. Prior to joining Mines in 2023, he was a Visiting Professor at EPFL's Laboratory of Photonics and Quantum Measurements and a Research Associate at the University of Colorado Boulder in the Microwave and RF Research Group. He earned his PhD <em>cum laude</em> from Universidad Carlos III de Madrid after completing research stays at the University of Otago, and received his B.Sc. in Electrical Engineering from the University of Carabobo, graduating first in his class. His research spans microwave photonics, quantum sensing, superconducting quantum computing, defense technologies, Earth observation, radio astronomy, and communications, with work published in journals including <em>Nature</em> and <em>Optica</em>.
+        Gabriel Santamaria-Botello is an Assistant Professor in the Electrical Engineering Department at Colorado School of Mines, where his group designs <span class="highlight">microwave and photonic integrated circuits</span> for RF receivers, transceivers, and sensors. Prior to joining Mines in 2023, he was a Research Associate at the University of Colorado Boulder in the Microwave and RF Research Group. In 2024 he was a Visiting Professor at EPFL's Laboratory of Photonics and Quantum Measurements. He earned his PhD <em>cum laude</em> in 2021 from Universidad Carlos III de Madrid, did a research stay at the University of Otago, and received his B.Sc. in Electrical Engineering from the University of Carabobo. His research spans microwave photonics, quantum sensing, superconducting circuits, remote sensing, radio astronomy and computational electromagnetics.
       </p>
     </div>
   </div>
@@ -1448,59 +1543,54 @@
         <div class="hl-cat">Featured · Publication</div>
         <h3 class="hl-title">Our work on <em>integrated electro-optic frequency combs</em> in lithium tantalate published in Nature.</h3>
         <p class="hl-desc">
-          With collaborators at EPFL, we demonstrated record-span electro-optic frequency comb generation in a fully photonic chip, validating a hypothesis from our early theoretical work nearly a decade ago. Connor Denney is co-author.
+          With collaborators at EPFL, we demonstrated record-span electro-optic frequency comb generation in a fully photonic chip.
         </p>
-        <div class="hl-date">January 2025 · Nature 637(8048):1096–1103 · IF 48.5</div>
-        <div class="hl-meta">
-          <span>LiTaO₃</span>
-          <span>EPFL collaboration</span>
-          <span>Microwave-to-optical transduction</span>
-        </div>
+        <div class="hl-date">January 2025 · Nature 637(8048):1096–1103</div>
       </article>
       </a>
 
+      <a class="hl-link" href="https://www.darpa.mil/news/2026/quantum-computing-different-qubits-better-together" target="_blank" rel="noopener">
       <article class="hl-card reveal">
         <div class="hl-cat">Grant · DARPA</div>
-        <h3 class="hl-title">Selected as performer in the <em>$1.65M DARPA HARQ</em> program.</h3>
+        <h3 class="hl-title">Selected as performer in <em>DARPA's HARQ program</em>.</h3>
         <p class="hl-desc">
-          One of 19 teams selected to develop heterogeneous quantum architectures, focused on microwave-to-optical quantum transducers for quantum computing networks. Lab share: $400k plus $130k option. Two-year program with EPFL as prime.
+          Together with EPFL, we were selected as one of the 19 teams to develop heterogeneous quantum architectures.
         </p>
         <div class="hl-date">2026 – 2028</div>
       </article>
+      </a>
 
+      <a class="hl-link" href="https://www.darpa.mil/events/rewinds/spark-tank" target="_blank" rel="noopener">
       <article class="hl-card reveal">
-        <div class="hl-cat">Spinout · Bifrost Electronics</div>
-        <h3 class="hl-title">Lab spinout <em>Bifrost Electronics</em> raises over $4M in venture funding.</h3>
+        <div class="hl-cat">Grant · DARPA</div>
+        <h3 class="hl-title">Awarded the <em>DARPA MTO SparkTank Pitch Day</em>.</h3>
         <p class="hl-desc">
-          Founded by PhD student Connor Denney from an Advanced Industries grant, Bifrost has licensed our strontium titanate parametric amplifier technology from Mines' TTO and now employs several former Mines students.
+          We were awarded the DARPA MTO PitchDay Award, to investigate RF-photonic sensors as part of the technical area "Commercially Catalyzed Defense Deployment". We were recently awarded a third phase to continue our research on photonic-enabled RF sensors.
         </p>
-        <div class="hl-date">2024 – present</div>
-        <div class="hl-meta">
-          <span>STO Varactors</span>
-          <span>TWPAs</span>
-          <span>Provisional patent</span>
-        </div>
-      </article>
-
-      <a class="hl-link" href="https://arxiv.org/abs/2510.06176" target="_blank" rel="noopener">
-      <article class="hl-card reveal">
-        <div class="hl-cat">Publication · Under review</div>
-        <h3 class="hl-title">Integrated photonic mm-wave receiver with <em>sub-ambient noise</em>, under minor revisions at Nature Photonics.</h3>
-        <p class="hl-desc">
-          Demonstration of ultra-low-noise millimeter-wave detection in a fully photonic chip. The microwave structure co-design, led by our group, was key to the unprecedented transduction efficiency.
-        </p>
-        <div class="hl-date">arXiv:2510.06176 · IF 32.9</div>
       </article>
       </a>
 
+      <a class="hl-link" href="https://bifrostelectronic.com/quantum-market-startup-news/" target="_blank" rel="noopener">
       <article class="hl-card reveal">
-        <div class="hl-cat">Recognition</div>
-        <h3 class="hl-title">Awarded the <em>URSI Young Scientist Award</em>.</h3>
+        <div class="hl-cat">Bifrost Electronics</div>
+        <h3 class="hl-title"><em>Bifrost Electronics</em> raises $4M in venture funding.</h3>
         <p class="hl-desc">
-          Recognized with the 2nd prize Young Scientist Award by the International Union of Radio Science (URSI) for early-career contributions to radio science. Additional honors include CU Boulder's Postdoc of the Year and a Best Student Paper Award at the Global Symposium on Millimeter Waves.
+          Co-Founded by PhD student Connor Denney, Bifrost Electronics is developing a parametric amplifier technology initiated in our lab with the support of an Advanced Industries Grant.
         </p>
-        <div class="hl-date">URSI · Cartagena, Spain</div>
+        <div class="hl-date">2024 – present</div>
       </article>
+      </a>
+
+      <a class="hl-link" href="https://arxiv.org/abs/2510.06176" target="_blank" rel="noopener">
+      <article class="hl-card reveal">
+        <div class="hl-cat">Publication · Preprint</div>
+        <h3 class="hl-title">Integrated photonic mm-wave receiver with <em>sub-ambient noise</em>.</h3>
+        <p class="hl-desc">
+          Demonstration of ultra-low-noise millimeter-wave detection in a fully photonic lithium tantalate chip.
+        </p>
+        <div class="hl-date">arXiv:2510.06176</div>
+      </article>
+      </a>
 
     </div>
 
@@ -1519,9 +1609,9 @@
     <article class="pub reveal">
       <div class="pub-num">P-01</div>
       <div class="pub-body">
-        <div class="venue">Nature <span class="if">IF 48.5</span></div>
-        <div class="title"><a href="https://doi.org/10.1038/s41586-024-08354-4" target="_blank" rel="noopener">Ultrabroadband integrated electro-optic frequency comb in lithium tantalate.</a></div>
-        <div class="authors">J. Zhang, C. Wang, <em>C. Denney*</em>, J. Riemensberger, G. Lihachev, J. Hu, W. Kao, T. Blesin, N. Kuznetsov, Z. Li, M. Churaev, X. Ou, <strong>G. Santamaria-Botello</strong>, T. J. Kippenberg.</div>
+        <div class="venue">J. Lightwave Technology · accepted</div>
+        <div class="title"><a href="https://arxiv.org/abs/2511.21955" target="_blank" rel="noopener">Photonic generation and free-space distribution of millimeter waves for portable optical clocks.</a></div>
+        <div class="authors">D. Meyer, A. Lind, W. Groman, H. Trent, C. Mashburn, M. Heyrich, J. Sherman, F. Quinlan, <strong>G. Santamaria-Botello</strong>, S. A. Diddams. arXiv:2511.21955.</div>
       </div>
       <div class="pub-year">2025</div>
     </article>
@@ -1529,7 +1619,7 @@
     <article class="pub reveal">
       <div class="pub-num">P-02</div>
       <div class="pub-body">
-        <div class="venue">Nature Photonics · under review <span class="if">IF 32.9</span></div>
+        <div class="venue">Nature Photonics · under review</div>
         <div class="title"><a href="https://arxiv.org/abs/2510.06176" target="_blank" rel="noopener">An integrated photonic millimeter-wave receiver with sub-ambient noise.</a></div>
         <div class="authors">J. Zhang, S. Zheng, J. Cai, <em>C. Denney*</em>, Z. Li, Y. Zhang, X. Ou, <strong>G. Santamaria-Botello</strong>, T. J. Kippenberg. arXiv:2510.06176.</div>
       </div>
@@ -1539,17 +1629,7 @@
     <article class="pub reveal">
       <div class="pub-num">P-03</div>
       <div class="pub-body">
-        <div class="venue">J. Lightwave Technology · accepted <span class="if">IF 4.8</span></div>
-        <div class="title"><a href="https://arxiv.org/abs/2511.21955" target="_blank" rel="noopener">Photonic generation and free-space distribution of millimeter waves for portable optical clocks.</a></div>
-        <div class="authors">D. Meyer, A. Lind, W. Groman, H. Trent, C. Mashburn, M. Heyrich, J. Sherman, F. Quinlan, <strong>G. Santamaria-Botello</strong>, S. A. Diddams. arXiv:2511.21955.</div>
-      </div>
-      <div class="pub-year">2025</div>
-    </article>
-
-    <article class="pub reveal">
-      <div class="pub-num">P-04</div>
-      <div class="pub-body">
-        <div class="venue">Optics Express <span class="if">IF 3.3</span></div>
+        <div class="venue">Optics Express</div>
         <div class="title"><a href="https://opg.optica.org/oe/abstract.cfm?uri=oe-33-5-10302" target="_blank" rel="noopener">Multichannel upconversion of terahertz radiation in an optical disk resonator.</a></div>
         <div class="authors">M. I. Suresh, F. Sedlmeir, D. W. Vogt, <strong>G. Santamaria-Botello</strong>, D. V. Strekalov, H. G. L. Schwefel.</div>
       </div>
@@ -1557,9 +1637,9 @@
     </article>
 
     <article class="pub reveal">
-      <div class="pub-num">P-05</div>
+      <div class="pub-num">P-04</div>
       <div class="pub-body">
-        <div class="venue">IEEE JERM in Med. & Biology <span class="if">IF 3.2</span></div>
+        <div class="venue">IEEE JERM in Med. & Biology</div>
         <div class="title"><a href="https://doi.org/10.1109/JERM.2024.3434519" target="_blank" rel="noopener">Classification of multi-layer tissue-mimicking dielectric stacks from 2 to 20 GHz.</a></div>
         <div class="authors">R. Streeter, J. Lee, <strong>G. Santamaria-Botello</strong>, Z. Popovic.</div>
       </div>
@@ -1567,9 +1647,19 @@
     </article>
 
     <article class="pub reveal">
+      <div class="pub-num">P-05</div>
+      <div class="pub-body">
+        <div class="venue">Nature</div>
+        <div class="title"><a href="https://doi.org/10.1038/s41586-024-08354-4" target="_blank" rel="noopener">Ultrabroadband integrated electro-optic frequency comb in lithium tantalate.</a></div>
+        <div class="authors">J. Zhang, C. Wang, <em>C. Denney*</em>, J. Riemensberger, G. Lihachev, J. Hu, W. Kao, T. Blesin, N. Kuznetsov, Z. Li, M. Churaev, X. Ou, <strong>G. Santamaria-Botello</strong>, T. J. Kippenberg.</div>
+      </div>
+      <div class="pub-year">2025</div>
+    </article>
+
+    <article class="pub reveal">
       <div class="pub-num">P-06</div>
       <div class="pub-body">
-        <div class="venue">Physical Review D <span class="if">IF 5.3</span></div>
+        <div class="venue">Physical Review D</div>
         <div class="title"><a href="https://doi.org/10.1103/PhysRevD.110.084002" target="_blank" rel="noopener">Fully metallic geodesic lenses as analog electromagnetic models of static and spherically symmetric gravitational fields.</a></div>
         <div class="authors">E. Falcón-Gómez, V. De Falco, K. A. Abdalmalak, A. Amor-Martín, V. De La Rubia, <strong>G. Santamaria-Botello</strong>, L. E. García Muñoz.</div>
       </div>
@@ -1579,9 +1669,9 @@
     <article class="pub reveal">
       <div class="pub-num">P-07</div>
       <div class="pub-body">
-        <div class="venue">IEEE Trans. Microwave Theory & Techn. <span class="if">IF 4.5</span></div>
-        <div class="title"><a href="https://doi.org/10.1109/TMTT.2023.3322859" target="_blank" rel="noopener">A 1.4-GHz GaAs MMIC radiometer for noninvasive internal body thermometry.</a></div>
-        <div class="authors">J. Lee, <strong>G. Santamaria-Botello</strong>, R. Streeter, Z. Popovic.</div>
+        <div class="venue">IEEE Trans. Microwave Theory & Techn.</div>
+        <div class="title"><a href="https://doi.org/10.1109/TMTT.2024.3355763" target="_blank" rel="noopener">Resonant structures for sensitivity enhancement of Rydberg-atom microwave receivers.</a></div>
+        <div class="authors">G. Sandidge, <strong>G. Santamaria-Botello</strong>, E. Bottomley, H. Fan, Z. Popovic.</div>
       </div>
       <div class="pub-year">2024</div>
     </article>
@@ -1589,14 +1679,12 @@
     <article class="pub reveal">
       <div class="pub-num">P-08</div>
       <div class="pub-body">
-        <div class="venue">IEEE Trans. Microwave Theory & Techn. <span class="if">IF 4.5</span></div>
-        <div class="title"><a href="https://doi.org/10.1109/TMTT.2024.3355763" target="_blank" rel="noopener">Resonant structures for sensitivity enhancement of Rydberg-atom microwave receivers.</a></div>
-        <div class="authors">G. Sandidge, <strong>G. Santamaria-Botello</strong>, E. Bottomley, H. Fan, Z. Popovic.</div>
+        <div class="venue">IEEE Trans. Microwave Theory & Techn.</div>
+        <div class="title"><a href="https://doi.org/10.1109/TMTT.2023.3322859" target="_blank" rel="noopener">A 1.4-GHz GaAs MMIC radiometer for noninvasive internal body thermometry.</a></div>
+        <div class="authors">J. Lee, <strong>G. Santamaria-Botello</strong>, R. Streeter, Z. Popovic.</div>
       </div>
       <div class="pub-year">2024</div>
     </article>
-
-  </div>
 
   <div class="pub-toggle reveal">
     <a class="btn" href="https://scholar.google.com/citations?user=EJXQAQ8AAAAJ&hl=en" target="_blank" rel="noopener" style="border:1px solid var(--ink);color:var(--ink)">
@@ -1618,19 +1706,19 @@
     <article class="talk invited reveal">
       <div class="talk-year">2026</div>
       <div class="talk-body">
-        <div class="talk-title">Opportunities and challenges of integrated photonics for microwave frontends.</div>
-        <div class="talk-venue">PREIN WP3 Integrated Photonics Workshop · Tampere University</div>
+        <div class="talk-title">Antenna Miniaturization Techniques: technical session.</div>
+        <div class="talk-venue">ACES 2026, Applied Computational Electromagnetics Society · Session organizer</div>
       </div>
-      <div class="talk-location">Tampere<span class="country">Finland</span></div>
+      <div class="talk-location">Thessaloniki<span class="country">Greece</span></div>
     </article>
 
     <article class="talk invited reveal">
       <div class="talk-year">2026</div>
       <div class="talk-body">
-        <div class="talk-title">Antenna Miniaturization Techniques: technical session.</div>
-        <div class="talk-venue">ACES 2026, Applied Computational Electromagnetics Society · Session organizer</div>
+        <div class="talk-title"><a href="https://prein.fi/events/prein-wp3-integrated-photonics-workshop/" target="_blank" rel="noopener">Opportunities and challenges of integrated photonics for microwave frontends.</a></div>
+        <div class="talk-venue">PREIN WP3 Integrated Photonics Workshop · Tampere University</div>
       </div>
-      <div class="talk-location">Thessaloniki<span class="country">Greece</span></div>
+      <div class="talk-location">Tampere<span class="country">Finland</span></div>
     </article>
 
     <article class="talk invited reveal">
@@ -1640,15 +1728,6 @@
         <div class="talk-venue">ANZCOP 2025, Australian and New Zealand Conference on Optics and Photonics</div>
       </div>
       <div class="talk-location">Auckland<span class="country">New Zealand</span></div>
-    </article>
-
-    <article class="talk invited reveal">
-      <div class="talk-year">2025</div>
-      <div class="talk-body">
-        <div class="talk-title">Electrooptic parametric circuits as low-noise millimeter-wave receivers.</div>
-        <div class="talk-venue">SPIE Photonics West 2025</div>
-      </div>
-      <div class="talk-location">San Francisco<span class="country">United States</span></div>
     </article>
 
     <article class="talk reveal">
@@ -1664,9 +1743,18 @@
       <div class="talk-year">2025</div>
       <div class="talk-body">
         <div class="talk-title">Traveling-wave parametric amplifiers on strontium titanate.</div>
-        <div class="talk-venue">PIERS 2025 · presented by Connor Denney</div>
+        <div class="talk-venue">PIERS 2025</div>
       </div>
       <div class="talk-location">Chiba<span class="country">Japan</span></div>
+    </article>
+
+    <article class="talk invited reveal">
+      <div class="talk-year">2025</div>
+      <div class="talk-body">
+        <div class="talk-title">Electrooptic parametric circuits as low-noise millimeter-wave receivers.</div>
+        <div class="talk-venue">SPIE Photonics West 2025</div>
+      </div>
+      <div class="talk-location">San Francisco<span class="country">United States</span></div>
     </article>
 
     <article class="talk reveal">
@@ -1686,8 +1774,6 @@
       </div>
       <div class="talk-location">Boulder<span class="country">United States</span></div>
     </article>
-
-  </div>
 
   <div class="pub-toggle reveal" style="margin-top:48px">
     <span style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding:10px 0">
@@ -1714,35 +1800,35 @@
       <img class="photo" src="connor.webp" alt="Connor Denney" />
       <div class="role">PhD</div>
       <div class="name">Connor Denney</div>
-      <div class="detail">Photonic ICs &amp; STO parametric amplifiers. Founder, Bifrost Electronics. Co-author on Nature 2025.</div>
+      <div class="detail">Photonic ICs &amp; STO parametric amplifiers. Founder, Bifrost Electronics.</div>
     </div>
 
     <div class="person reveal">
       <img class="photo" src="steffen.webp" alt="Steffen Kross" />
       <div class="role">PhD</div>
       <div class="name">Steffen Kross</div>
-      <div class="detail">Fully photonic mm-wave receivers · AFOSR &amp; DARPA HARQ.</div>
+      <div class="detail">Fully photonic mm-wave receivers.</div>
     </div>
 
     <div class="person reveal">
       <img class="photo" src="lisa.jpg" alt="Lisa Elmiladi" />
       <div class="role">PhD</div>
       <div class="name">Lisa Elmiladi</div>
-      <div class="detail">Packaged electro-optic dual combs · COEDIT &amp; DARPA.</div>
+      <div class="detail">Packaged electro-optic dual combs.</div>
     </div>
 
     <div class="person reveal">
       <img class="photo" src="ethan.jpg" alt="Ethan Hansen" />
       <div class="role">MSc · EE</div>
       <div class="name">Ethan Hansen</div>
-      <div class="detail">NIST PREP fellow.</div>
+      <div class="detail">NIST PREP fellow. On-wafer RF and thermoreflectance measurements.</div>
     </div>
 
     <div class="person reveal">
       <img class="photo" src="cameron.webp" alt="Cameron Connolly-Hergert" />
-      <div class="role">Undergraduate Researcher</div>
+      <div class="role">Undergraduate researcher (now NIST PREP fellow)</div>
       <div class="name">Cameron Connolly-Hergert</div>
-      <div class="detail">Co-author, APS March Meeting 2026.</div>
+      <div class="detail">RF metrology.</div>
     </div>
 
   </div>
@@ -1752,14 +1838,18 @@
 <section class="gallery" id="gallery">
   <div class="section-head reveal">
     <h2 class="section-title">In the <em>lab</em>.</h2>
-    <span class="section-kicker">Inside the Microwave Photonics Lab</span>
+    <span class="section-kicker">Inside the Microwave &amp; Photonics Lab · scroll →</span>
   </div>
 
   <div class="gallery-grid">
-    <figure class="reveal"><img src="labone.jpeg" alt="Microwave Photonics Lab" /></figure>
-    <figure class="reveal"><img src="labtwo.jpeg" alt="Microwave Photonics Lab" /></figure>
-    <figure class="reveal"><img src="labthree.jpeg" alt="Microwave Photonics Lab" /></figure>
-    <figure class="reveal"><img src="labfour.jpeg" alt="Microwave Photonics Lab" /></figure>
+    <figure class="reveal"><img src="labone.jpeg" alt="Microwave & Photonics Lab" /></figure>
+    <figure class="reveal"><img src="labtwo.jpeg" alt="Microwave & Photonics Lab" /></figure>
+    <figure class="reveal"><img src="labthree.jpeg" alt="Microwave & Photonics Lab" /></figure>
+    <figure class="reveal"><img src="labfour.jpeg" alt="Microwave & Photonics Lab" /></figure>
+    <figure class="reveal"><img src="labfive.jpg" alt="Microwave & Photonics Lab" /></figure>
+    <figure class="reveal"><img src="labsix.jpeg" alt="Microwave & Photonics Lab" /></figure>
+    <figure class="reveal"><img src="labseven.jpeg" alt="Microwave & Photonics Lab" /></figure>
+    <figure class="reveal"><img src="labeight.jpg" alt="Microwave & Photonics Lab" /></figure>
   </div>
 </section>
 
@@ -1805,7 +1895,7 @@
         </p>
       </div>
       <div class="contact-actions reveal">
-        <a class="btn" href="mailto:gabrielsantamariab@gmail.com">
+        <a class="btn" href="mailto:Gabriel.SantamariaBotello@mines.edu">
           <span>Email to apply</span>
           <span class="arrow">→</span>
         </a>
@@ -1816,7 +1906,7 @@
       <h4>Find us</h4>
       <dl>
         <dt>PI</dt><dd>Gabriel Santamaria-Botello</dd>
-        <dt>Email</dt><dd>gabrielsantamariab@gmail.com</dd>
+        <dt>Email</dt><dd>Gabriel.SantamariaBotello@mines.edu</dd>
         <dt>Dept.</dt><dd>Electrical Engineering<br/>Colorado School of Mines</dd>
         <dt>City</dt><dd>Golden, Colorado</dd>
       </dl>
@@ -1825,7 +1915,7 @@
 </section>
 
 <footer>
-  <div>© 2026 · Microwave Photonics Lab · Colorado School of Mines</div>
+  <div>© 2026 · Microwave & Photonics Lab · Colorado School of Mines</div>
   <div>gsant.phd</div>
 </footer>
 
