@@ -885,15 +885,16 @@
   .hl-card{
     position:relative;
     padding:40px 36px;
-    background:var(--paper-2);
-    border:1px solid rgba(11,15,20,.1);
-    border-left:3px solid var(--accent);
+    background:var(--ink);
+    color:var(--paper);
+    border:1px solid rgba(244,241,234,.08);
+    border-left:3px solid var(--accent-3);
     transition:transform .3s ease, box-shadow .3s ease;
     overflow:hidden;
   }
   .hl-card:hover{
     transform:translateX(4px);
-    box-shadow:-6px 12px 32px -16px rgba(11,15,20,.25);
+    box-shadow:-6px 12px 32px -16px rgba(11,15,20,.5);
   }
   /* clickable highlight cards */
   a.hl-link{
@@ -907,19 +908,12 @@
     top:24px;right:26px;
     font-family:var(--serif);
     font-size:20px;
-    color:var(--accent);
+    color:var(--accent-3);
     opacity:0;
     transform:translate(-4px,4px);
     transition:opacity .3s ease, transform .3s ease;
   }
-  a.hl-link .hl-card.featured::after{color:var(--accent-3)}
   a.hl-link:hover .hl-card::after{opacity:.9;transform:translate(0,0)}
-  .hl-card.featured{
-    background:var(--ink);
-    color:var(--paper);
-    border-left-color:var(--accent-3);
-    padding:48px 40px;
-  }
   .hl-card .hl-cat{
     display:inline-flex;align-items:center;gap:10px;
     font-family:var(--mono);
@@ -927,9 +921,8 @@
     letter-spacing:.2em;
     text-transform:uppercase;
     margin-bottom:18px;
-    color:var(--accent);
+    color:var(--accent-3);
   }
-  .hl-card.featured .hl-cat{color:var(--accent-3)}
   .hl-card .hl-cat::before{
     content:"";
     width:18px;height:1px;background:currentColor;
@@ -942,36 +935,31 @@
     letter-spacing:-.01em;
     margin-bottom:14px;
   }
-  .hl-card.featured .hl-title{font-size:34px}
-  .hl-card .hl-title em{font-style:italic;color:var(--accent)}
-  .hl-card.featured .hl-title em{color:var(--accent-3)}
+  .hl-card .hl-title em{font-style:italic;color:var(--accent-3)}
   .hl-card .hl-desc{
     font-size:15px;
     line-height:1.6;
-    color:var(--ink-2);
+    color:rgba(244,241,234,.78);
     margin-bottom:16px;
   }
-  .hl-card.featured .hl-desc{color:rgba(244,241,234,.78)}
   .hl-card .hl-date{
     font-family:var(--mono);
     font-size:11px;
     letter-spacing:.12em;
-    color:var(--mute);
+    color:rgba(244,241,234,.5);
   }
-  .hl-card.featured .hl-date{color:rgba(244,241,234,.5)}
   .hl-card .hl-meta{
     display:flex;gap:14px;flex-wrap:wrap;
     margin-top:18px;
     padding-top:18px;
-    border-top:1px solid rgba(11,15,20,.1);
+    border-top:1px solid rgba(244,241,234,.15);
   }
-  .hl-card.featured .hl-meta{border-top-color:rgba(244,241,234,.15)}
   .hl-card .hl-meta span{
     font-family:var(--mono);
     font-size:10px;
     letter-spacing:.14em;
     text-transform:uppercase;
-    color:var(--mute);
+    color:rgba(244,241,234,.55);
   }
   .hl-card.featured .hl-meta span{color:rgba(244,241,234,.55)}
 
@@ -1438,7 +1426,7 @@
     <div class="highlights">
 
       <a class="hl-link" href="https://doi.org/10.1038/s41586-024-08354-4" target="_blank" rel="noopener">
-      <article class="hl-card featured reveal">
+      <article class="hl-card reveal">
         <div class="hl-cat">Featured · Publication</div>
         <h3 class="hl-title">Our work on <em>integrated electro-optic frequency combs</em> in lithium tantalate published in Nature.</h3>
         <p class="hl-desc">
