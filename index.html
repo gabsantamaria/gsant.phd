@@ -117,7 +117,7 @@
   /* ---------- HERO ---------- */
   .hero{
     min-height:100vh;
-    padding:140px 36px 80px;
+    padding:140px 36px 130px;
     position:relative;
     display:grid;
     grid-template-columns:1fr;
@@ -129,9 +129,10 @@
   /* spectral background */
   .hero-spectrum{
     position:absolute;
-    inset:0;
+    left:0;right:0;bottom:40px;
+    height:120px;
     pointer-events:none;
-    opacity:.55;
+    opacity:.5;
   }
   .hero-spectrum svg{width:100%;height:100%}
 
@@ -269,14 +270,6 @@
     line-height:1.55;
     margin-bottom:24px;
     color:var(--ink-2);
-  }
-  .about-prose p:first-of-type::first-letter{
-    font-size:5em;
-    float:left;
-    line-height:.85;
-    margin:.05em .12em 0 -.05em;
-    font-weight:500;
-    color:var(--accent);
   }
   .about-prose .highlight{
     background:linear-gradient(180deg, transparent 60%, rgba(217,79,42,.18) 60%);
@@ -529,6 +522,28 @@
     margin-bottom:8px;
     font-weight:400;
   }
+  .pub-body .title a{
+    color:inherit;
+    text-decoration:none;
+    background-image:linear-gradient(var(--accent), var(--accent));
+    background-size:0% 1px;
+    background-repeat:no-repeat;
+    background-position:left 90%;
+    transition:background-size .3s ease, color .25s ease;
+  }
+  .pub-body .title a:hover{
+    color:var(--accent);
+    background-size:100% 1px;
+  }
+  .pub-body .title a::after{
+    content:" \2197";
+    font-size:.7em;
+    color:var(--mute);
+    vertical-align:super;
+    opacity:0;
+    transition:opacity .25s ease;
+  }
+  .pub-body .title a:hover::after{opacity:.8}
   .pub-body .authors{
     font-size:14px;
     color:var(--mute);
@@ -1135,6 +1150,60 @@
     .partners-stat .ps-big{font-size:38px}
   }
 
+  /* ---------- LAB GALLERY ---------- */
+  .gallery{
+    background:var(--paper);
+  }
+  .gallery-grid{
+    max-width:1300px;margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+  }
+  .gallery-grid figure{
+    margin:0;
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(11,15,20,.1);
+    background:var(--paper-2);
+    aspect-ratio:4 / 5;
+  }
+  .gallery-grid img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:grayscale(12%);
+    transition:transform .5s ease, filter .4s ease;
+  }
+  .gallery-grid figure:hover img{
+    transform:scale(1.04);
+    filter:grayscale(0%);
+  }
+  .gallery-grid figcaption{
+    position:absolute;
+    left:0;right:0;bottom:0;
+    padding:14px 16px;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--paper);
+    background:linear-gradient(transparent, rgba(10,13,18,.82));
+    opacity:0;
+    transition:opacity .3s ease;
+  }
+  .gallery-grid figure:hover figcaption{opacity:1}
+  /* tablets: 2 x 2 */
+  @media (max-width:880px){
+    .gallery-grid{grid-template-columns:repeat(2, 1fr)}
+  }
+  /* phones: single column */
+  @media (max-width:480px){
+    .gallery-grid{grid-template-columns:1fr}
+    .gallery-grid figure{aspect-ratio:4 / 3}
+  }
+
   /* ---------- ANIMATIONS ---------- */
   .reveal{
     opacity:0;
@@ -1159,6 +1228,7 @@
     <a href="#publications">Publications</a>
     <a href="#talks">Talks</a>
     <a href="#team">Team</a>
+    <a href="#gallery">Lab</a>
     <a href="#teaching">Teaching</a>
     <a href="#join">Join</a>
   </div>
@@ -1168,42 +1238,12 @@
 <header class="hero" id="top">
   <!-- spectral background svg -->
   <div class="hero-spectrum" aria-hidden="true">
-    <svg viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="g1" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0%" stop-color="#d94f2a" stop-opacity="0"/>
-          <stop offset="40%" stop-color="#d94f2a" stop-opacity=".35"/>
-          <stop offset="70%" stop-color="#c9a449" stop-opacity=".25"/>
-          <stop offset="100%" stop-color="#2b6cb0" stop-opacity="0"/>
-        </linearGradient>
-        <linearGradient id="g2" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stop-color="#0a0d12" stop-opacity="0"/>
-          <stop offset="100%" stop-color="#0a0d12" stop-opacity=".06"/>
-        </linearGradient>
-      </defs>
-      <!-- horizontal spectrum band -->
-      <rect x="0" y="540" width="1400" height="2" fill="#0a0d12" opacity=".4"/>
-      <!-- frequency ticks -->
-      <g font-family="JetBrains Mono, monospace" font-size="9" fill="#0a0d12" opacity=".5">
-        <line x1="120" y1="540" x2="120" y2="552" stroke="#0a0d12"/>
-        <text x="120" y="568" text-anchor="middle">1 GHz</text>
-        <line x1="380" y1="540" x2="380" y2="552" stroke="#0a0d12"/>
-        <text x="380" y="568" text-anchor="middle">10 GHz</text>
-        <line x1="640" y1="540" x2="640" y2="552" stroke="#0a0d12"/>
-        <text x="640" y="568" text-anchor="middle">100 GHz</text>
-        <line x1="900" y1="540" x2="900" y2="552" stroke="#0a0d12"/>
-        <text x="900" y="568" text-anchor="middle">1 THz</text>
-        <line x1="1160" y1="540" x2="1160" y2="552" stroke="#0a0d12"/>
-        <text x="1160" y="568" text-anchor="middle">200 THz · optical</text>
-      </g>
-      <!-- waveform -->
-      <path d="M 0 460 Q 100 380 200 460 T 400 460 T 600 460 T 800 460 T 1000 460 T 1200 460 T 1400 460"
+    <svg viewBox="0 0 1400 120" preserveAspectRatio="xMidYMid slice">
+      <!-- waveforms -->
+      <path d="M 0 40 Q 100 0 200 40 T 400 40 T 600 40 T 800 40 T 1000 40 T 1200 40 T 1400 40"
             stroke="#d94f2a" stroke-width="1.2" fill="none" opacity=".5"/>
-      <path d="M 0 480 Q 80 420 160 480 T 320 480 T 480 480 T 640 480 T 800 480 T 960 480 T 1120 480 T 1280 480 T 1440 480"
+      <path d="M 0 64 Q 80 18 160 64 T 320 64 T 480 64 T 640 64 T 800 64 T 960 64 T 1120 64 T 1280 64 T 1440 64"
             stroke="#2b6cb0" stroke-width="1" fill="none" opacity=".4"/>
-      <!-- big gradient bar -->
-      <rect x="0" y="500" width="1400" height="36" fill="url(#g1)"/>
-      <rect x="0" y="0" width="1400" height="800" fill="url(#g2)"/>
     </svg>
   </div>
 
@@ -1330,13 +1370,7 @@
   <div class="about-grid single">
     <div class="about-prose reveal">
       <p>
-        Gabriel Santamaria-Botello is an Assistant Professor in the Electrical Engineering Department at the Colorado School of Mines, where his group leverages recent advances in <span class="highlight">photonic integrated circuit technology</span> to engineer microwave receivers, transceivers and sensors that outperform their electronic counterparts.
-      </p>
-      <p>
-        Before joining Mines in August 2023, Gabriel was a Visiting Professor at EPFL's Laboratory of Photonics and Quantum Measurements with Prof. Tobias J. Kippenberg, and a Research Associate at the University of Colorado Boulder in the Microwave and RF Research Group of Prof. Zoya Popovic. He earned his PhD <em>cum laude</em> from University Charles III of Madrid, with prior research stays at the University of Otago and a B.Sc. in Electrical Engineering from the University of Carabobo, Venezuela, where he ranked first in his class.
-      </p>
-      <p>
-        His early theoretical work established sensitivity bounds for photonic upconversion (<em>Optica</em>, 2018), proposing that electro-optic systems could surpass the noise performance of state-of-the-art transistors — a hypothesis his group and collaborators recently validated experimentally with publications in <em>Nature</em> and <em>Nature Photonics</em> (under review). The group's research spans quantum sensing, superconducting quantum computing, defense and electromagnetic warfare, Earth observation, radio astronomy, and communications.
+        Gabriel Santamaria-Botello is an Assistant Professor in the Electrical Engineering Department at Colorado School of Mines, where his group develops <span class="highlight">photonic integrated circuit technologies</span> for microwave receivers, transceivers, and sensing systems. Prior to joining Mines in 2023, he was a Visiting Professor at EPFL's Laboratory of Photonics and Quantum Measurements and a Research Associate at the University of Colorado Boulder in the Microwave and RF Research Group. He earned his PhD <em>cum laude</em> from Universidad Carlos III de Madrid after completing research stays at the University of Otago, and received his B.Sc. in Electrical Engineering from the University of Carabobo, graduating first in his class. His research spans microwave photonics, quantum sensing, superconducting quantum computing, defense technologies, Earth observation, radio astronomy, and communications, with work published in journals including <em>Nature</em> and <em>Optica</em>.
       </p>
     </div>
   </div>
@@ -1420,7 +1454,7 @@
       <div class="pub-num">P—01</div>
       <div class="pub-body">
         <div class="venue">Nature <span class="if">IF 48.5</span></div>
-        <div class="title">Ultrabroadband integrated electro-optic frequency comb in lithium tantalate.</div>
+        <div class="title"><a href="https://doi.org/10.1038/s41586-024-08354-4" target="_blank" rel="noopener">Ultrabroadband integrated electro-optic frequency comb in lithium tantalate.</a></div>
         <div class="authors">J. Zhang, C. Wang, <em>C. Denney*</em>, J. Riemensberger, G. Lihachev, J. Hu, W. Kao, T. Blesin, N. Kuznetsov, Z. Li, M. Churaev, X. Ou, <strong>G. Santamaria-Botello</strong>, T. J. Kippenberg.</div>
       </div>
       <div class="pub-year">2025</div>
@@ -1430,7 +1464,7 @@
       <div class="pub-num">P—02</div>
       <div class="pub-body">
         <div class="venue">Nature Photonics · under review <span class="if">IF 32.9</span></div>
-        <div class="title">An integrated photonic millimeter-wave receiver with sub-ambient noise.</div>
+        <div class="title"><a href="https://arxiv.org/abs/2510.06176" target="_blank" rel="noopener">An integrated photonic millimeter-wave receiver with sub-ambient noise.</a></div>
         <div class="authors">J. Zhang, S. Zheng, J. Cai, <em>C. Denney*</em>, Z. Li, Y. Zhang, X. Ou, <strong>G. Santamaria-Botello</strong>, T. J. Kippenberg. arXiv:2510.06176.</div>
       </div>
       <div class="pub-year">2025</div>
@@ -1440,7 +1474,7 @@
       <div class="pub-num">P—03</div>
       <div class="pub-body">
         <div class="venue">J. Lightwave Technology · accepted <span class="if">IF 4.8</span></div>
-        <div class="title">Photonic generation and free-space distribution of millimeter waves for portable optical clocks.</div>
+        <div class="title"><a href="https://arxiv.org/abs/2511.21955" target="_blank" rel="noopener">Photonic generation and free-space distribution of millimeter waves for portable optical clocks.</a></div>
         <div class="authors">D. Meyer, A. Lind, W. Groman, H. Trent, C. Mashburn, M. Heyrich, J. Sherman, F. Quinlan, <strong>G. Santamaria-Botello</strong>, S. A. Diddams. arXiv:2511.21955.</div>
       </div>
       <div class="pub-year">2025</div>
@@ -1450,7 +1484,7 @@
       <div class="pub-num">P—04</div>
       <div class="pub-body">
         <div class="venue">Optics Express <span class="if">IF 3.3</span></div>
-        <div class="title">Multichannel upconversion of terahertz radiation in an optical disk resonator.</div>
+        <div class="title"><a href="https://opg.optica.org/oe/abstract.cfm?uri=oe-33-5-10302" target="_blank" rel="noopener">Multichannel upconversion of terahertz radiation in an optical disk resonator.</a></div>
         <div class="authors">M. I. Suresh, F. Sedlmeir, D. W. Vogt, <strong>G. Santamaria-Botello</strong>, D. V. Strekalov, H. G. L. Schwefel.</div>
       </div>
       <div class="pub-year">2025</div>
@@ -1460,7 +1494,7 @@
       <div class="pub-num">P—05</div>
       <div class="pub-body">
         <div class="venue">IEEE JERM in Med. & Biology <span class="if">IF 3.2</span></div>
-        <div class="title">Classification of multi-layer tissue-mimicking dielectric stacks from 2 to 20 GHz.</div>
+        <div class="title"><a href="https://doi.org/10.1109/JERM.2024.3434519" target="_blank" rel="noopener">Classification of multi-layer tissue-mimicking dielectric stacks from 2 to 20 GHz.</a></div>
         <div class="authors">R. Streeter, J. Lee, <strong>G. Santamaria-Botello</strong>, Z. Popovic.</div>
       </div>
       <div class="pub-year">2025</div>
@@ -1470,7 +1504,7 @@
       <div class="pub-num">P—06</div>
       <div class="pub-body">
         <div class="venue">Physical Review D <span class="if">IF 5.3</span></div>
-        <div class="title">Fully metallic geodesic lenses as analog electromagnetic models of static and spherically symmetric gravitational fields.</div>
+        <div class="title"><a href="https://doi.org/10.1103/PhysRevD.110.084002" target="_blank" rel="noopener">Fully metallic geodesic lenses as analog electromagnetic models of static and spherically symmetric gravitational fields.</a></div>
         <div class="authors">E. Falcón-Gómez, V. De Falco, K. A. Abdalmalak, A. Amor-Martín, V. De La Rubia, <strong>G. Santamaria-Botello</strong>, L. E. García Muñoz.</div>
       </div>
       <div class="pub-year">2024</div>
@@ -1480,7 +1514,7 @@
       <div class="pub-num">P—07</div>
       <div class="pub-body">
         <div class="venue">IEEE Trans. Microwave Theory & Techn. <span class="if">IF 4.5</span></div>
-        <div class="title">A 1.4-GHz GaAs MMIC radiometer for noninvasive internal body thermometry.</div>
+        <div class="title"><a href="https://doi.org/10.1109/TMTT.2023.3322859" target="_blank" rel="noopener">A 1.4-GHz GaAs MMIC radiometer for noninvasive internal body thermometry.</a></div>
         <div class="authors">J. Lee, <strong>G. Santamaria-Botello</strong>, R. Streeter, Z. Popovic.</div>
       </div>
       <div class="pub-year">2024</div>
@@ -1490,7 +1524,7 @@
       <div class="pub-num">P—08</div>
       <div class="pub-body">
         <div class="venue">IEEE Trans. Microwave Theory & Techn. <span class="if">IF 4.5</span></div>
-        <div class="title">Resonant structures for sensitivity enhancement of Rydberg-atom microwave receivers.</div>
+        <div class="title"><a href="https://doi.org/10.1109/TMTT.2024.3355763" target="_blank" rel="noopener">Resonant structures for sensitivity enhancement of Rydberg-atom microwave receivers.</a></div>
         <div class="authors">G. Sandidge, <strong>G. Santamaria-Botello</strong>, E. Bottomley, H. Fan, Z. Popovic.</div>
       </div>
       <div class="pub-year">2024</div>
@@ -1510,7 +1544,7 @@
 <section class="talks" id="talks">
   <div class="section-head reveal">
     <span class="section-num">§ 05</span>
-    <h2 class="section-title">Invited <em>talks</em>.</h2>
+    <h2 class="section-title"><em>Talks</em>.</h2>
     <span class="section-kicker">Recent international &amp; technical advisory engagements</span>
   </div>
 
@@ -1519,9 +1553,8 @@
     <article class="talk invited reveal">
       <div class="talk-year">2026</div>
       <div class="talk-body">
-        <span class="talk-flag">★ Invited</span>
         <div class="talk-title">Opportunities and challenges of integrated photonics for microwave frontends.</div>
-        <div class="talk-venue">PREIN WP3 Integrated Photonics Workshop</div>
+        <div class="talk-venue">PREIN WP3 Integrated Photonics Workshop · Tampere University</div>
       </div>
       <div class="talk-location">Tampere<span class="country">Finland</span></div>
     </article>
@@ -1529,17 +1562,15 @@
     <article class="talk invited reveal">
       <div class="talk-year">2026</div>
       <div class="talk-body">
-        <span class="talk-flag">★ Session Organizer</span>
         <div class="talk-title">Antenna Miniaturization Techniques — technical session.</div>
-        <div class="talk-venue">ACES 2026 — Applied Computational Electromagnetics Society</div>
+        <div class="talk-venue">ACES 2026 — Applied Computational Electromagnetics Society · Session organizer</div>
       </div>
-      <div class="talk-location">Greece<span class="country">May 2026</span></div>
+      <div class="talk-location">Thessaloniki<span class="country">Greece</span></div>
     </article>
 
     <article class="talk invited reveal">
       <div class="talk-year">2025</div>
       <div class="talk-body">
-        <span class="talk-flag">★ Invited</span>
         <div class="talk-title">Fully photonic-integrated low-noise microwave receiver frontends.</div>
         <div class="talk-venue">ANZCOP 2025 — Australian and New Zealand Conference on Optics and Photonics</div>
       </div>
@@ -1549,7 +1580,6 @@
     <article class="talk invited reveal">
       <div class="talk-year">2025</div>
       <div class="talk-body">
-        <span class="talk-flag">★ Invited</span>
         <div class="talk-title">Electrooptic parametric circuits as low-noise millimeter-wave receivers.</div>
         <div class="talk-venue">SPIE Photonics West 2025</div>
       </div>
@@ -1580,7 +1610,7 @@
         <div class="talk-title">Efficiency and radiative cooling tradeoffs in integrated electro-optic THz radiometers.</div>
         <div class="talk-venue">IRMMW-THz 2024 — 49th Int'l Conference on Infrared, Millimeter, and Terahertz Waves</div>
       </div>
-      <div class="talk-location">—<span class="country">Sep 2024</span></div>
+      <div class="talk-location">Perth<span class="country">Australia</span></div>
     </article>
 
     <article class="talk reveal">
@@ -1589,7 +1619,7 @@
         <div class="talk-title">Photonic-integrated modulators as millimeter and submillimeter-wave hyperspectral receivers with no pre-amplification.</div>
         <div class="talk-venue">USNC-URSI National Radio Science Meeting</div>
       </div>
-      <div class="talk-location">Boulder, CO<span class="country">United States</span></div>
+      <div class="talk-location">Boulder<span class="country">United States</span></div>
     </article>
 
   </div>
@@ -1606,7 +1636,6 @@
   <div class="section-head reveal">
     <span class="section-num">§ 06</span>
     <h2 class="section-title">The <em>team</em>.</h2>
-    <span class="section-kicker">Students at Mines &amp; NIST</span>
   </div>
 
   <div class="team-grid">
@@ -1655,10 +1684,26 @@
   </div>
 </section>
 
+<!-- LAB GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="section-head reveal">
+    <span class="section-num">§ 07</span>
+    <h2 class="section-title">In the <em>lab</em>.</h2>
+    <span class="section-kicker">Inside the Microwave Photonics Lab</span>
+  </div>
+
+  <div class="gallery-grid">
+    <figure class="reveal"><img src="labone.jpeg" alt="Microwave Photonics Lab" /></figure>
+    <figure class="reveal"><img src="labtwo.jpeg" alt="Microwave Photonics Lab" /></figure>
+    <figure class="reveal"><img src="labthree.jpeg" alt="Microwave Photonics Lab" /></figure>
+    <figure class="reveal"><img src="labfour.jpeg" alt="Microwave Photonics Lab" /></figure>
+  </div>
+</section>
+
 <!-- TEACHING -->
 <section class="teaching" id="teaching">
   <div class="section-head reveal">
-    <span class="section-num">§ 07</span>
+    <span class="section-num">§ 08</span>
     <h2 class="section-title"><em>Teaching</em>.</h2>
     <span class="section-kicker">Electrical &amp; Quantum Engineering at Mines</span>
   </div>
