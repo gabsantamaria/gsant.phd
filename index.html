@@ -264,6 +264,24 @@
     grid-template-columns:1fr;
     max-width:900px;
   }
+  .about-grid.portrait{
+    grid-template-columns:340px 1fr;
+    gap:56px;
+    max-width:1150px;
+    align-items:center;
+  }
+  .about-photo img{
+    width:100%;
+    aspect-ratio:4 / 5;
+    object-fit:cover;
+    object-position:center top;
+    display:block;
+    border-radius:4px;
+    border:1px solid rgba(11,15,20,.12);
+    filter:grayscale(12%);
+    transition:filter .4s ease;
+  }
+  .about-photo:hover img{filter:grayscale(0%)}
   .about-prose p{
     font-family:var(--serif);
     font-size:21px;
@@ -315,6 +333,8 @@
   @media (max-width:960px){
     .about-grid{grid-template-columns:1fr;gap:48px}
     .about-side{position:static}
+    .about-grid.portrait{grid-template-columns:1fr;gap:32px;max-width:680px}
+    .about-photo img{max-width:300px;margin:0 auto;aspect-ratio:1 / 1}
   }
 
   /* ---------- RESEARCH ---------- */
@@ -1367,7 +1387,10 @@
     <span class="section-kicker">Gabriel Santamaria-Botello, PhD</span>
   </div>
 
-  <div class="about-grid single">
+  <div class="about-grid portrait">
+    <div class="about-photo reveal">
+      <img src="gabriel.jpg" alt="Gabriel Santamaria-Botello" />
+    </div>
     <div class="about-prose reveal">
       <p>
         Gabriel Santamaria-Botello is an Assistant Professor in the Electrical Engineering Department at Colorado School of Mines, where his group develops <span class="highlight">photonic integrated circuit technologies</span> for microwave receivers, transceivers, and sensing systems. Prior to joining Mines in 2023, he was a Visiting Professor at EPFL's Laboratory of Photonics and Quantum Measurements and a Research Associate at the University of Colorado Boulder in the Microwave and RF Research Group. He earned his PhD <em>cum laude</em> from Universidad Carlos III de Madrid after completing research stays at the University of Otago, and received his B.Sc. in Electrical Engineering from the University of Carabobo, graduating first in his class. His research spans microwave photonics, quantum sensing, superconducting quantum computing, defense technologies, Earth observation, radio astronomy, and communications, with work published in journals including <em>Nature</em> and <em>Optica</em>.
