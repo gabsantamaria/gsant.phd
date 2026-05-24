@@ -880,6 +880,7 @@
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
     gap:24px;
+    align-items:stretch;
   }
   .highlights .featured{
     grid-column:1 / -1;
@@ -893,7 +894,12 @@
     border-left:3px solid var(--accent-3);
     transition:transform .3s ease, box-shadow .3s ease;
     overflow:hidden;
+    height:100%;
+    display:flex;
+    flex-direction:column;
   }
+  .hl-card .hl-desc{flex:1 1 auto}
+  .hl-card .hl-date{margin-top:auto;padding-top:8px}
   .hl-card:hover{
     transform:translateX(4px);
     box-shadow:-6px 12px 32px -16px rgba(11,15,20,.5);
@@ -903,6 +909,7 @@
     display:block;
     text-decoration:none;
     color:inherit;
+    height:100%;
   }
   a.hl-link .hl-card::after{
     content:"\2197";
@@ -1609,6 +1616,17 @@
     <!-- LEFT: featured highlights -->
     <div class="highlights">
 
+      <a class="hl-link" href="https://doi.org/10.1109/JLT.2026.3694597" target="_blank" rel="noopener">
+      <article class="hl-card reveal">
+        <div class="hl-cat">Publication · J. Lightwave Technology</div>
+        <h3 class="hl-title">Photonic generation and free-space distribution of <em>millimeter waves</em> for portable optical clocks.</h3>
+        <p class="hl-desc">
+          In collaboration with CU Boulder and NIST, published in the Journal of Lightwave Technology.
+        </p>
+        <div class="hl-date">May 2026</div>
+      </article>
+      </a>
+
       <a class="hl-link" href="https://doi.org/10.1038/s41586-024-08354-4" target="_blank" rel="noopener">
       <article class="hl-card reveal">
         <div class="hl-cat">Featured · Publication</div>
@@ -1680,11 +1698,11 @@
     <article class="pub reveal">
       <div class="pub-num">P-01</div>
       <div class="pub-body">
-        <div class="venue">J. Lightwave Technology · accepted</div>
-        <div class="title"><a href="https://arxiv.org/abs/2511.21955" target="_blank" rel="noopener">Photonic generation and free-space distribution of millimeter waves for portable optical clocks.</a></div>
-        <div class="authors">D. Meyer, A. Lind, W. Groman, H. Trent, C. Mashburn, M. Heyrich, J. Sherman, F. Quinlan, <strong>G. Santamaria-Botello</strong>, S. A. Diddams. arXiv:2511.21955.</div>
+        <div class="venue">Journal of Lightwave Technology</div>
+        <div class="title"><a href="https://doi.org/10.1109/JLT.2026.3694597" target="_blank" rel="noopener">Photonic generation and free-space distribution of millimeter waves for portable optical clocks.</a></div>
+        <div class="authors">D. Meyer, A. Lind, W. Groman, H. Trent, C. Mashburn, M. Heyrich, J. Sherman, F. Quinlan, <strong>G. Santamaria-Botello</strong>, S. A. Diddams.</div>
       </div>
-      <div class="pub-year">2025</div>
+      <div class="pub-year">2026</div>
     </article>
 
     <article class="pub reveal">
