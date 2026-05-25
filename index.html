@@ -1408,10 +1408,21 @@
     .section-title{font-size:clamp(32px, 10vw, 44px)}
     .contact{padding:80px 20px 50px}
     .news{padding:72px 20px}
+    .highlights{grid-template-columns:1fr}
     .gallery-grid{gap:16px}
     .hl-card{padding:32px 24px}
     .hl-card .hl-title{font-size:24px}
+    .pub{padding:28px 0}
+    .pub-body .title{font-size:19px}
+    .talk-body .talk-title{font-size:18px}
     footer{padding:28px 20px;flex-direction:column;align-items:flex-start;gap:10px}
+  }
+  /* word-wrap safety: prevent long titles, DOIs, emails from clipping/overflowing */
+  .hl-title, .hl-desc, .pub-body .title, .pub-body .authors,
+  .talk-body .talk-title, .talk-body .talk-venue,
+  .about-prose p, .contact-info dd, .hero-tagline{
+    overflow-wrap:break-word;
+    word-wrap:break-word;
   }
 
   /* ---------- ANIMATIONS ---------- */
@@ -1528,7 +1539,7 @@
       <div class="rc-num">2.4 / Parametric amplification</div>
       <h3>A new class of <em>STO-based</em> quantum-limited microwave amplifiers.</h3>
       <p>
-        Strontium titanate thin films as a paraelectric medium for microwave parametric processes, sidestepping the magnetic sensitivity issues of Josephson-junction amplifiers used by every superconducting-qubit platform today. First demonstration of varactor-based quantum-limited amplification at cryogenic temperatures.
+        Strontium titanate as a nonlinear medium to engineer microwave parametric processes, avoiding the magnetic sensitivity issues and frequency limitations of Josephson-junction amplifiers used in most superconducting-qubit platforms today.
       </p>
     </article>
 
@@ -1577,7 +1588,7 @@
         <img src="epfl.svg" alt="EPFL" />
         <img src="cuboulder.png" alt="University of Colorado Boulder" />
         <img src="uc3m.png" alt="Universidad Carlos III de Madrid" />
-        <img src="esa.svg" alt="European Space Agency" />
+        <img src="esa.png" alt="European Space Agency" />
         <img src="airbus.svg" alt="Airbus" />
       </div>
     </div>
@@ -1623,18 +1634,18 @@
         <p class="hl-desc">
           In collaboration with CU Boulder and NIST, published in the Journal of Lightwave Technology.
         </p>
-        <div class="hl-date">May 2026</div>
+        <div class="hl-date">May 2026 · Journal of Lightwave Technology</div>
       </article>
       </a>
 
-      <a class="hl-link" href="https://doi.org/10.1038/s41586-024-08354-4" target="_blank" rel="noopener">
+      <a class="hl-link" href="https://arxiv.org/abs/2510.06176" target="_blank" rel="noopener">
       <article class="hl-card reveal">
-        <div class="hl-cat">Featured · Publication</div>
-        <h3 class="hl-title">Our work on <em>integrated electro-optic frequency combs</em> in lithium tantalate published in Nature.</h3>
+        <div class="hl-cat">Publication · Preprint</div>
+        <h3 class="hl-title">Integrated photonic mm-wave receiver with <em>sub-ambient noise</em>.</h3>
         <p class="hl-desc">
-          With collaborators at EPFL, we demonstrated record-span electro-optic frequency comb generation in a fully photonic chip.
+          Demonstration of ultra-low-noise millimeter-wave detection in a fully photonic lithium tantalate chip.
         </p>
-        <div class="hl-date">January 2025 · Nature 637(8048):1096–1103</div>
+        <div class="hl-date">arXiv:2510.06176</div>
       </article>
       </a>
 
@@ -1645,7 +1656,6 @@
         <p class="hl-desc">
           Together with EPFL, we were selected as one of the 19 teams to develop heterogeneous quantum architectures.
         </p>
-        <div class="hl-date">2026 – 2028</div>
       </article>
       </a>
 
@@ -1666,27 +1676,21 @@
         <p class="hl-desc">
           Co-Founded by PhD student Connor Denney, Bifrost Electronics is developing a parametric amplifier technology initiated in our lab with the support of an Advanced Industries Grant.
         </p>
-        <div class="hl-date">2024 – present</div>
       </article>
       </a>
 
-      <a class="hl-link" href="https://arxiv.org/abs/2510.06176" target="_blank" rel="noopener">
+      <a class="hl-link" href="https://doi.org/10.1038/s41586-024-08354-4" target="_blank" rel="noopener">
       <article class="hl-card reveal">
-        <div class="hl-cat">Publication · Preprint</div>
-        <h3 class="hl-title">Integrated photonic mm-wave receiver with <em>sub-ambient noise</em>.</h3>
+        <div class="hl-cat">Featured · Publication</div>
+        <h3 class="hl-title">Our work on <em>integrated electro-optic frequency combs</em> in lithium tantalate published in Nature.</h3>
         <p class="hl-desc">
-          Demonstration of ultra-low-noise millimeter-wave detection in a fully photonic lithium tantalate chip.
+          With collaborators at EPFL, we demonstrated record-span electro-optic frequency comb generation in a fully photonic chip.
         </p>
-        <div class="hl-date">arXiv:2510.06176</div>
+        <div class="hl-date">January 2025 · Nature 637(8048):1096–1103</div>
       </article>
       </a>
 
-    </div>
-
-  </div>
-</section>
-
-<!-- PUBLICATIONS -->
+    <!-- PUBLICATIONS -->
 <section class="pubs" id="publications">
   <div class="section-head reveal">
     <h2 class="section-title">Selected <em>publications</em>.</h2>
@@ -1804,6 +1808,7 @@
     <article class="talk invited reveal">
       <div class="talk-year">2026</div>
       <div class="talk-body">
+        <span class="talk-flag">Invited</span>
         <div class="talk-title"><a href="https://prein.fi/events/prein-wp3-integrated-photonics-workshop/" target="_blank" rel="noopener">Opportunities and challenges of integrated photonics for microwave frontends.</a></div>
         <div class="talk-venue">PREIN WP3 Integrated Photonics Workshop · Tampere University</div>
       </div>
@@ -1813,6 +1818,7 @@
     <article class="talk invited reveal">
       <div class="talk-year">2025</div>
       <div class="talk-body">
+        <span class="talk-flag">Invited</span>
         <div class="talk-title">Fully photonic-integrated low-noise microwave receiver frontends.</div>
         <div class="talk-venue">ANZCOP 2025, Australian and New Zealand Conference on Optics and Photonics</div>
       </div>
@@ -1840,7 +1846,8 @@
     <article class="talk invited reveal">
       <div class="talk-year">2025</div>
       <div class="talk-body">
-        <div class="talk-title">Electrooptic parametric circuits as low-noise millimeter-wave receivers.</div>
+        <span class="talk-flag">Invited</span>
+        <div class="talk-title"><a href="https://doi.org/10.1117/12.3046492" target="_blank" rel="noopener">Electrooptic parametric circuits as low-noise millimeter-wave receivers.</a></div>
         <div class="talk-venue">SPIE Photonics West 2025</div>
       </div>
       <div class="talk-location">San Francisco<span class="country">United States</span></div>
@@ -1849,7 +1856,7 @@
     <article class="talk reveal">
       <div class="talk-year">2024</div>
       <div class="talk-body">
-        <div class="talk-title">Efficiency and radiative cooling tradeoffs in integrated electro-optic THz radiometers.</div>
+        <div class="talk-title"><a href="https://doi.org/10.1109/IRMMW-THz60956.2024.10697734" target="_blank" rel="noopener">Efficiency and radiative cooling tradeoffs in integrated electro-optic THz radiometers.</a></div>
         <div class="talk-venue">IRMMW-THz 2024, 49th Int'l Conference on Infrared, Millimeter, and Terahertz Waves</div>
       </div>
       <div class="talk-location">Perth<span class="country">Australia</span></div>
@@ -1858,17 +1865,12 @@
     <article class="talk reveal">
       <div class="talk-year">2024</div>
       <div class="talk-body">
-        <div class="talk-title">Photonic-integrated modulators as millimeter and submillimeter-wave hyperspectral receivers with no pre-amplification.</div>
+        <div class="talk-title"><a href="https://doi.org/10.23919/USNC-URSINRSM60317.2024.10465196" target="_blank" rel="noopener">Photonic-integrated modulators as millimeter and submillimeter-wave hyperspectral receivers with no pre-amplification.</a></div>
         <div class="talk-venue">USNC-URSI National Radio Science Meeting</div>
       </div>
       <div class="talk-location">Boulder<span class="country">United States</span></div>
     </article>
 
-  <div class="pub-toggle reveal" style="margin-top:48px">
-    <span style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding:10px 0">
-      Technical advisory: European Space Agency · Airbus UK · Bifrost Electronics
-    </span>
-  </div>
 </section>
 
 <!-- TEAM -->
@@ -2011,6 +2013,7 @@
 <footer>
   <div>© 2026 · Microwave & Photonics Lab · Colorado School of Mines</div>
   <div>gsant.phd</div>
+  <div>Designed by Gabriela Santamaria</div>
 </footer>
 
 <script>
