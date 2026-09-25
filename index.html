@@ -617,12 +617,19 @@
   .team-grid{
     max-width:1300px;margin:0 auto;
     display:grid;
-    grid-template-columns:repeat(6, 1fr);
+    grid-template-columns:repeat(4, 1fr);
     gap:16px;
   }
-  /* large tablets / small laptops: 3 across (clean 3+3) */
+  .team-subhead{
+    max-width:1300px;margin:72px auto 28px;
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(28px, 3.5vw, 40px);
+    letter-spacing:-.01em;
+  }
+  /* large tablets / small laptops: 2 across */
   @media (max-width:1100px){
-    .team-grid{grid-template-columns:repeat(3, 1fr)}
+    .team-grid{grid-template-columns:repeat(2, 1fr)}
   }
   /* tablets: 2 across */
   @media (max-width:720px){
@@ -1479,7 +1486,7 @@
     </h1>
 
     <p class="hero-tagline reveal">
-      We are microwave engineers developing <strong>low-noise electromagnetic sensors</strong> for quantum computing, Earth observation, remote sensing, and Positioning, Navigation and Timing (PNT). We co-design microwave and photonic integrated circuits to push sensors beyond the limits of conventional analog electronics.
+      We are microwave engineers developing <strong>low-noise electromagnetic sensors</strong> for remote sensing, Positioning, Navigation and Timing (PNT), Earth observation, communications, and quantum computing. We co-design microwave and photonic integrated circuits to push sensors beyond the limits of conventional analog electronics.
     </p>
 
     <div class="hero-meta reveal">
@@ -1497,7 +1504,7 @@
       </div>
       <div class="hero-meta-item">
         <div class="label">External Funding</div>
-        <div class="value">$1.6M+ (PI share)</div>
+        <div class="value">$1.7M+ (Lab share)</div>
       </div>
     </div>
   </div>
@@ -1568,14 +1575,15 @@
   <div class="partners-inner">
 
     <div class="partners-group">
-      <div class="partners-sublabel">Funding</div>
+      <div class="partners-sublabel">Sponsors</div>
       <div class="partners-fund">
         <div class="partners-stat">
-          <span class="ps-big">$1.65M</span>
-          <span class="ps-lab">External funding secured<br/>(PI share)</span>
+          <span class="ps-big">$1.7M+</span>
+          <span class="ps-lab">External funding secured<br/>(Lab share)</span>
         </div>
         <img src="darpa.png" alt="DARPA" />
         <img src="afosr.png" alt="Air Force Office of Scientific Research" />
+        <img src="usaf.svg" alt="United States Air Force" />
         <img src="coedit.svg" alt="Colorado Office of Economic Development and International Trade" />
       </div>
     </div>
@@ -1650,15 +1658,6 @@
       </article>
       </a>
 
-      <a class="hl-link" href="https://www.darpa.mil/news/2026/quantum-computing-different-qubits-better-together" target="_blank" rel="noopener">
-      <article class="hl-card reveal">
-        <div class="hl-cat">Grant · DARPA</div>
-        <h3 class="hl-title">Selected as performer in <em>DARPA's HARQ program</em>.</h3>
-        <p class="hl-desc">
-          Together with EPFL, we were selected as one of the 19 teams to develop heterogeneous quantum architectures.
-        </p>
-      </article>
-      </a>
 
       <a class="hl-link" href="https://www.darpa.mil/events/rewinds/spark-tank" target="_blank" rel="noopener">
       <article class="hl-card reveal">
@@ -1910,6 +1909,17 @@
     </div>
 
     <div class="person reveal">
+      <img class="photo" src="cameron.webp" alt="Cameron Connolly-Hergert" />
+      <div class="role">Undergraduate researcher (now NIST PREP fellow)</div>
+      <div class="name">Cameron Connolly-Hergert</div>
+      <div class="detail">RF metrology.</div>
+    </div>
+
+  </div>
+
+  <h3 class="team-subhead reveal">Alumni</h3>
+  <div class="team-grid">
+    <div class="person reveal">
       <img class="photo" src="lisa.jpg" alt="Lisa Elmiladi" />
       <div class="role">PhD</div>
       <div class="name">Lisa Elmiladi</div>
@@ -1922,21 +1932,13 @@
       <div class="name">Ethan Hansen</div>
       <div class="detail">NIST PREP fellow. On-wafer RF and thermoreflectance measurements.</div>
     </div>
-
-    <div class="person reveal">
-      <img class="photo" src="cameron.webp" alt="Cameron Connolly-Hergert" />
-      <div class="role">Undergraduate researcher (now NIST PREP fellow)</div>
-      <div class="name">Cameron Connolly-Hergert</div>
-      <div class="detail">RF metrology.</div>
-    </div>
-
   </div>
 </section>
 
 <!-- LAB GALLERY -->
 <section class="gallery" id="gallery">
   <div class="section-head reveal">
-    <h2 class="section-title">In the <em>lab</em>.</h2>
+    <h2 class="section-title">In (and out) the <em>lab</em>.</h2>
     <span class="section-kicker">Inside the Microwave &amp; Photonics Lab · scroll →</span>
   </div>
 
@@ -1978,6 +1980,11 @@
     <div class="course reveal">
       <div class="course-code">EENG 532<span class="level">Fall 2025, 2026</span></div>
       <div class="course-title">Low Temperature Microwave Measurements</div>
+    </div>
+
+    <div class="course reveal">
+      <div class="course-code">EENG 533</div>
+      <div class="course-title">Active RF and Microwave Devices</div>
     </div>
 
     <div class="course reveal">
