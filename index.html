@@ -917,6 +917,7 @@
     padding-top:3px;
   }
   .contact-info dd{color:rgba(244,241,234,.9);line-height:1.5}
+  .contact-info .email-img{display:block;max-width:100%;height:auto;margin-top:-1px}
 
   @media (max-width:860px){
     .contact-inner{grid-template-columns:1fr;gap:48px}
@@ -2112,7 +2113,7 @@
         </p>
       </div>
       <div class="contact-actions reveal">
-        <a class="btn" href="mailto:Gabriel.SantamariaBotello@mines.edu">
+        <a class="btn js-mail" href="#join">
           <span>Email to apply</span>
           <span class="arrow">→</span>
         </a>
@@ -2123,7 +2124,7 @@
       <h4>Find us</h4>
       <dl>
         <dt>PI</dt><dd>Gabriel Santamaria-Botello</dd>
-        <dt>Email</dt><dd>Gabriel.SantamariaBotello@mines.edu</dd>
+        <dt>Email</dt><dd><a class="js-mail" href="#join"><img class="email-img" src="email.png" width="232" height="21" alt="Email address (shown as image)" /></a></dd>
         <dt>Dept.</dt><dd>Electrical Engineering<br/>Colorado School of Mines</dd>
         <dt>City</dt><dd>Golden, Colorado</dd>
       </dl>
@@ -2138,6 +2139,12 @@
 </footer>
 
 <script>
+  // Email links: address assembled at runtime so it never appears in the HTML
+  (function(){
+    const addr = ['Gabriel.SantamariaBotello', 'mines.edu'].join('@');
+    document.querySelectorAll('.js-mail').forEach(a => a.href = 'mailto:' + addr);
+  })();
+
   // Nav scroll state
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
