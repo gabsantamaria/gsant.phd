@@ -759,6 +759,73 @@
     .course{grid-template-columns:1fr;gap:8px}
   }
 
+  /* ---------- TOOLS ---------- */
+  .tools{background:var(--paper-2)}
+  .tools-grid{
+    max-width:1300px;margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:16px;
+  }
+  a.tool{
+    position:relative;
+    display:flex;flex-direction:column;
+    padding:32px 28px;
+    background:var(--paper);
+    border:1px solid rgba(11,15,20,.12);
+    transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  a.tool:hover{
+    transform:translateY(-3px);
+    border-color:var(--accent);
+    box-shadow:0 18px 40px -18px rgba(11,15,20,.25);
+  }
+  a.tool::after{
+    content:"\2197";
+    position:absolute;top:26px;right:26px;
+    font-family:var(--serif);font-size:20px;
+    color:var(--accent);
+    opacity:.35;
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  a.tool:hover::after{opacity:1;transform:translate(2px,-2px)}
+  .tool .tool-url{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.06em;
+    color:var(--accent);
+    margin-bottom:18px;
+    padding-right:28px;
+    overflow-wrap:anywhere;
+  }
+  .tool h3{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:26px;
+    line-height:1.15;
+    letter-spacing:-.01em;
+    margin-bottom:14px;
+  }
+  .tool p{
+    font-size:15px;
+    line-height:1.6;
+    color:var(--ink-2);
+    margin-bottom:22px;
+  }
+  .tool .tool-tags{
+    margin-top:auto;
+    display:flex;flex-wrap:wrap;gap:8px;
+  }
+  .tool .tool-tags span{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:5px 9px;
+    border:1px solid rgba(11,15,20,.18);
+    color:var(--mute);
+  }
+
   /* ---------- JOIN / CONTACT ---------- */
   .contact{
     background:var(--ink);
@@ -1459,6 +1526,7 @@
     <a href="#team">Team</a>
     <a href="#gallery">Lab</a>
     <a href="#teaching">Teaching</a>
+    <a href="#tools">Tools</a>
     <a href="#join">Join</a>
   </div>
 </nav>
@@ -1991,6 +2059,44 @@
       <div class="course-code">EENG 281<span class="level">Spring 2025</span></div>
       <div class="course-title">Introduction to Electrical Circuits, Electronics and Power</div>
     </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools" id="tools">
+  <div class="section-head reveal">
+    <h2 class="section-title">Our <em>tools</em>.</h2>
+    <span class="section-kicker">Free, browser-based · built in the lab</span>
+  </div>
+
+  <div class="tools-grid">
+    <a class="tool reveal" href="https://tl.mwphotonics.com" target="_blank" rel="noopener">
+      <div class="tool-url">tl.mwphotonics.com</div>
+      <h3>Transmission-Line Wave Visualizer</h3>
+      <p>Interactive animation of voltage and current waves on lossless transmission lines: reflections, bounce diagrams, cascaded sections and standing waves.</p>
+      <div class="tool-tags"><span>Teaching</span><span>EENG 530</span></div>
+    </a>
+
+    <a class="tool reveal" href="https://sstudio.mwphotonics.com" target="_blank" rel="noopener">
+      <div class="tool-url">sstudio.mwphotonics.com</div>
+      <h3>S-Param Studio</h3>
+      <p>Import Touchstone .sNp files and plot S-parameters on XY or Smith charts, with markers and publication-ready PNG/PDF export.</p>
+      <div class="tool-tags"><span>Touchstone</span><span>Smith chart</span></div>
+    </a>
+
+    <a class="tool reveal" href="https://easyrfpic.mwphotonics.com" target="_blank" rel="noopener">
+      <div class="tool-url">easyrfpic.mwphotonics.com</div>
+      <h3>easyRFPIC</h3>
+      <p>Layout tool for RF-photonic integrated circuits.</p>
+      <div class="tool-tags"><span>Photonics</span><span>Layout</span></div>
+    </a>
+
+    <a class="tool reveal" href="https://nc.mwphotonics.com" target="_blank" rel="noopener">
+      <div class="tool-url">nc.mwphotonics.com</div>
+      <h3>NC Explorer</h3>
+      <p>NetCDF (.nc) plotter for instrument data. Explore multidimensional sweeps with sliders and 2D, rainbow or 3D plots. Files never leave your computer.</p>
+      <div class="tool-tags"><span>NetCDF</span><span>Data</span></div>
+    </a>
   </div>
 </section>
 
