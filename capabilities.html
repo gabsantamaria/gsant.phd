@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 <meta name="theme-color" content="#0f0f0f" />
 <title>Lab capabilities — Microwave &amp; Photonics Lab</title>
-<meta name="description" content="Equipment and facilities of the Microwave &amp; Photonics Lab at Colorado School of Mines: DC–50 GHz RF and microwave measurement, mm-wave and photonics on-wafer probing, mm-wave and THz metrology, photonics, wire bonding and fiber-to-PIC packaging." />
+<meta name="description" content="Equipment and facilities of the Microwave &amp; Photonics Lab at Colorado School of Mines: DC–50 GHz RF and microwave measurement, mm-wave and photonics on-wafer probing, mm-wave and THz metrology, photonics, wire bonding, fiber-to-PIC packaging and simulation software." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -207,6 +207,7 @@
   .gh{padding-bottom:10px;align-items:end}
   .gh .gl{display:flex;gap:10px;font-size:15px;font-weight:600;line-height:1.35}
   .gh .gl b{color:var(--red);font-weight:700;font-variant-numeric:tabular-nums}
+  .gh .gl .dim{color:var(--mute);font-weight:500}
   .gh .ch{font-size:13px;font-weight:500;color:var(--mute);line-height:1.35}
   .spec{padding:16px 0 18px;row-gap:4px;align-items:baseline}
   .spec .nm{font-size:19px;font-weight:700;letter-spacing:-.015em;line-height:1.25}
@@ -547,13 +548,22 @@
     <header class="sh g">
       <div class="sh-num c-l">06</div>
       <div class="c-r">
-        <h2 class="sh-title">In-house software</h2>
-        <p class="sh-kick">Free, browser-based · built in the lab</p>
+        <h2 class="sh-title">Software</h2>
+        <p class="sh-kick">Simulation and design suites · in-house tools</p>
       </div>
     </header>
 
     <div class="grp">
-      <div class="gh g bare"><span class="ch c2" aria-hidden="true">Address</span><span class="ch c3" aria-hidden="true">What it does</span></div>
+      <div class="gh g"><h3 class="gl"><b>6.1</b>Simulation &amp; design</h3><span class="ch c2" aria-hidden="true">Vendor</span><span class="ch c3" aria-hidden="true">Used for</span></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm">HFSS</span><span class="mk">Ansys</span><span class="sp">3D full-wave electromagnetic simulation</span></li>
+        <li class="spec g"><span class="nm">Advanced Design System (ADS)</span><span class="mk">Keysight</span><span class="sp">RF and microwave circuit and planar electromagnetic simulation</span></li>
+        <li class="spec g"><span class="nm">Lumerical</span><span class="mk">Ansys</span><span class="sp">Photonic device and circuit simulation</span></li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <div class="gh g"><h3 class="gl"><b>6.2</b>In-house tools <span class="dim">· free, browser-based</span></h3><span class="ch c2" aria-hidden="true">Address</span><span class="ch c3" aria-hidden="true">What it does</span></div>
       <ul class="rows">
         <li><a class="spec g" href="https://tl.mwphotonics.com" target="_blank" rel="noopener"><span class="nm">Transmission-Line Wave Visualizer</span><span class="mk">tl.<wbr>mwphotonics.com</span><span class="sp">Interactive animation of voltage and current waves on lossless transmission lines: reflections, bounce diagrams, cascaded sections and standing waves. Used in EENG&nbsp;530.</span></a></li>
         <li><a class="spec g" href="https://sstudio.mwphotonics.com" target="_blank" rel="noopener"><span class="nm">S-Param Studio</span><span class="mk">sstudio.<wbr>mwphotonics.com</span><span class="sp">Import Touchstone .sNp files and plot <span class="nw">S-parameter</span>s on XY or Smith charts, with markers and publication-ready PNG/PDF export.</span></a></li>
