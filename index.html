@@ -86,6 +86,8 @@
   .nav-links a b{font-weight:500;color:var(--mute);font-variant-numeric:tabular-nums;font-size:12px}
   .nav-links a:hover{color:var(--red)}
   .nav-links a:hover b{color:var(--red)}
+  /* 11 items: tighten spacing just above the Menu breakpoint so the brand never truncates */
+  @media (min-width:1181px) and (max-width:1279px){ .nav-links{gap:15px} .nav-links a{gap:5px} }
   .menu-btn{
     display:none;
     font:600 15px/1 var(--font);
@@ -112,7 +114,7 @@
     .nav-links a:first-child{border-top:0}
     .nav-links a b{font-size:14px;width:24px}
   }
-  @media (max-width:1180px) and (max-height:620px){
+  @media (max-width:1180px) and (max-height:700px){
     .nav-links a{padding:8px 0}
   }
   @media (max-width:359px){
@@ -365,6 +367,11 @@
     .photos figure.w{height:42vw}
   }
 
+  /* ---------- CAPABILITIES (teaser; full list on capabilities.html) ---------- */
+  .cap-lede{font-size:clamp(20px, 1.9vw, 25px);line-height:1.42;letter-spacing:-.012em;max-width:31em;margin-bottom:48px;text-wrap:pretty}
+  #capabilities .more{margin-top:8px}
+  @media (max-width:899px){ .cap-lede{margin-bottom:36px} }
+
   /* ---------- TEACHING ---------- */
   .course{padding:20px 0 24px;row-gap:6px;align-items:baseline}
   .course .code{font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
@@ -506,9 +513,10 @@
       <a href="#talks"><b>05</b>Talks</a>
       <a href="#team"><b>06</b>Team</a>
       <a href="#gallery"><b>07</b>Lab</a>
-      <a href="#teaching"><b>08</b>Teaching</a>
-      <a href="#tools"><b>09</b>Tools</a>
-      <a href="#join"><b>10</b>Join</a>
+      <a href="#capabilities"><b>08</b>Capabilities</a>
+      <a href="#teaching"><b>09</b>Teaching</a>
+      <a href="#tools"><b>10</b>Tools</a>
+      <a href="#join"><b>11</b>Join</a>
     </div>
   </div>
 </nav>
@@ -975,11 +983,36 @@
   </div>
 </section>
 
-<!-- 08 TEACHING -->
-<section class="sec" id="teaching">
+<!-- 08 CAPABILITIES (teaser; full list on capabilities.html) -->
+<section class="sec" id="capabilities">
   <div class="wrap">
     <header class="sh g">
       <div class="sh-num c-l">08</div>
+      <div class="c-r">
+        <h2 class="sh-title">Lab capabilities</h2>
+        <p class="sh-kick">RF, mm-wave, THz and photonics · test and assembly</p>
+      </div>
+    </header>
+
+    <div class="g">
+      <div class="c-r">
+        <p class="cap-lede">Microwave and photonic test benches in one lab: DC–&#8288;50&nbsp;GHz electronic measurement, mm-wave and photonics on-wafer probing, THz power metrology and ultra-low-noise lasers, plus in-house wire bonding and fibre-to-PIC packaging.</p>
+      </div>
+    </div>
+
+    <div class="g more">
+      <div class="c-r">
+        <a class="btn" href="capabilities.html"><span>All equipment</span><span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 TEACHING -->
+<section class="sec" id="teaching">
+  <div class="wrap">
+    <header class="sh g">
+      <div class="sh-num c-l">09</div>
       <div class="c-r">
         <h2 class="sh-title">Teaching</h2>
         <p class="sh-kick">Electrical &amp; Quantum Engineering at Mines</p>
@@ -1016,11 +1049,11 @@
   </div>
 </section>
 
-<!-- 09 TOOLS -->
+<!-- 10 TOOLS -->
 <section class="sec" id="tools">
   <div class="wrap">
     <header class="sh g">
-      <div class="sh-num c-l">09</div>
+      <div class="sh-num c-l">10</div>
       <div class="c-r">
         <h2 class="sh-title">Our tools</h2>
         <p class="sh-kick">Free, browser-based · built in the lab</p>
@@ -1056,11 +1089,11 @@
   </div>
 </section>
 
-<!-- 10 JOIN -->
+<!-- 11 JOIN -->
 <section class="sec join" id="join">
   <div class="wrap">
     <header class="sh g">
-      <div class="sh-num c-l">10</div>
+      <div class="sh-num c-l">11</div>
       <div class="c-r"><h2 class="sh-title">Join the lab</h2></div>
     </header>
 

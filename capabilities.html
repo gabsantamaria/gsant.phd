@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#0f0f0f" />
+<title>Lab capabilities — Microwave &amp; Photonics Lab</title>
+<meta name="description" content="Equipment and facilities of the Microwave &amp; Photonics Lab at Colorado School of Mines: DC–50 GHz RF and microwave measurement, mm-wave and photonics on-wafer probing, mm-wave and THz metrology, photonics, wire bonding and fibre-to-PIC packaging." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+<style>
+  /* =========================================================
+     Swiss theme, dark: same tokens, grid, nav and footer as index.html.
+     ========================================================= */
+  :root{
+    color-scheme:dark;
+    --bg:#0f0f0f;
+    --ink:#f2f2f2;
+    --ink-2:#cccccc;
+    --mute:#9b9b9b;
+    --line:#e6e6e6;
+    --hair:#333333;
+    --tick:#a8a8a8;
+    --ph:#1c1c1c;
+    --red:#ff2d2d;
+    --red-deep:#e3000f;
+    --gap:24px;
+    --pad:40px;
+    --nav-h:60px;
+    --font:'Hanken Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;overflow-x:hidden;background:var(--bg)}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font);
+    font-size:17px;
+    line-height:1.5;
+    font-feature-settings:"ss01" 0;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--red-deep);color:#fff}
+  a{color:inherit;text-decoration:none}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+  img{display:block;max-width:100%}
+  ul{list-style:none}
+  [id]{scroll-margin-top:var(--nav-h)}
+  @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+
+  .nw{white-space:nowrap}   /* keep hyphenated compounds on one line */
+
+  /* ---------- GRID ---------- */
+  .wrap{max-width:1400px;margin:0 auto;padding:0 var(--pad)}
+  .g{display:grid;grid-template-columns:minmax(0,1fr);column-gap:var(--gap)}
+  @media (min-width:900px){
+    .g{grid-template-columns:repeat(12,minmax(0,1fr))}
+    .c-l{grid-column:1 / 4}
+    .c-r{grid-column:4 / -1}
+    .c-full{grid-column:1 / -1}
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:var(--bg);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .wrap{
+    height:var(--nav-h);
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{
+    display:flex;align-items:center;gap:12px;min-height:44px;min-width:0;
+    font-weight:700;font-size:16px;letter-spacing:-.01em;white-space:nowrap;
+  }
+  .brand span{overflow:hidden;text-overflow:ellipsis}
+  .brand i{width:14px;height:14px;background:var(--red);display:block;flex:none}
+  .nav-links{display:flex;gap:22px;font-size:14px;font-weight:500}
+  .nav-links a{display:flex;gap:6px;align-items:baseline;white-space:nowrap}
+  .nav-links a b{font-weight:500;color:var(--mute);font-variant-numeric:tabular-nums;font-size:12px}
+  .nav-links a:hover{color:var(--red)}
+  .nav-links a:hover b{color:var(--red)}
+  /* 11 items: tighten spacing just above the Menu breakpoint so the brand never truncates */
+  @media (min-width:1181px) and (max-width:1279px){ .nav-links{gap:15px} .nav-links a{gap:5px} }
+  .nav-links a[aria-current="page"], .nav-links a[aria-current="page"] b{color:var(--red)}
+  .menu-btn{
+    display:none;
+    font:600 15px/1 var(--font);
+    background:none;border:0;color:var(--ink);cursor:pointer;
+    min-height:44px;padding:0 0 0 20px;align-items:center;flex:none;
+  }
+  @media (max-width:1180px){
+    .menu-btn{display:flex}
+    .nav-links{
+      display:none;
+      position:absolute;top:var(--nav-h);left:0;right:0;
+      background:var(--bg);
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      flex-direction:column;gap:0;
+      padding:0 var(--pad) 12px;
+      font-size:20px;font-weight:600;
+      max-height:calc(100vh - var(--nav-h));
+      max-height:calc(100dvh - var(--nav-h));
+      overflow-y:auto;overscroll-behavior:contain;
+    }
+    .nav.open .nav-links{display:flex}
+    .nav-links a{padding:12px 0;border-top:1px solid var(--hair);gap:14px}
+    .nav-links a:first-child{border-top:0}
+    .nav-links a b{font-size:14px;width:24px}
+  }
+  @media (max-width:1180px) and (max-height:700px){
+    .nav-links a{padding:8px 0}
+  }
+  @media (max-width:359px){
+    .nav .wrap{gap:12px}
+    .brand{font-size:15px;gap:10px}
+    .menu-btn{padding-left:8px}
+  }
+
+  /* ---------- PAGE HEAD ---------- */
+  .phead{padding:calc(var(--nav-h) + 32px) 0 0}
+  .phead-g{border-top:2px solid var(--ink);padding-top:14px;row-gap:0}
+  .hero-inst{font-size:15px;font-weight:600;line-height:1.35}
+  .hero-inst span{display:block;color:var(--mute);font-weight:500}
+  .hero-title{
+    font-weight:800;
+    font-size:clamp(40px, 5vw, 76px);
+    line-height:.9;
+    letter-spacing:-.045em;
+    margin-left:-.045em;
+  }
+  .intro{
+    margin-top:28px;
+    font-size:clamp(17px, 1.42vw, 20px);line-height:1.5;letter-spacing:-.006em;
+    color:var(--ink-2);max-width:38em;
+  }
+  .intro strong{font-weight:700;color:var(--ink)}
+
+  /* key figures */
+  .figs{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gap);
+    border-top:1px solid var(--line);margin-top:56px;padding-top:16px;
+  }
+  .figs li{padding:0 0 18px}
+  .figs b{display:block;font-size:clamp(34px, 3.6vw, 52px);font-weight:800;letter-spacing:-.045em;line-height:.95;font-variant-numeric:tabular-nums}
+  .figs b small{font-size:.42em;font-weight:700;letter-spacing:-.01em;margin-left:.18em}
+  .figs span{display:block;margin-top:10px;font-size:15px;color:var(--mute);font-weight:500;line-height:1.35}
+  @media (min-width:900px){
+    .figs{grid-template-columns:repeat(12,minmax(0,1fr))}
+    .figs li{grid-column:span 3;padding-bottom:0}
+  }
+  @media (max-width:899px){
+    .figs li:nth-child(n+3){border-top:1px solid var(--hair);padding-top:14px}
+  }
+
+  /* photo band */
+  .band{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin-top:56px;padding-bottom:96px}
+  .band figure{min-width:0}
+  .band .ph{position:relative;overflow:hidden;background:var(--ph)}
+  .band .ph::before{content:"";display:block;padding-top:66.6667%}
+  .band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .band figcaption{font-size:14px;color:var(--mute);margin-top:10px;font-weight:500;line-height:1.35}
+  @media (min-width:640px) and (max-width:899px){
+    .band{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media (min-width:900px){
+    .band{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap)}
+    .band .b1{grid-column:span 7}
+    .band .b2{grid-column:span 5}
+    /* capped height: hero-probe.jpg is only 1024x682; 432px matches the home hero, so 2x screens upscale it no more than there */
+    .band .ph::before{padding-top:0;height:min(32vw, 432px)}
+    .band .b2 img{object-position:45% 55%}
+  }
+
+  /* ---------- SECTIONS ---------- */
+  .sec{border-top:1px solid var(--line);padding:40px 0 120px}
+  .sh{margin-bottom:56px;align-items:start}
+  .sh-num{
+    font-weight:800;color:var(--red-deep);
+    font-size:clamp(56px, 6.6vw, 100px);
+    line-height:.78;letter-spacing:-.06em;
+    font-variant-numeric:tabular-nums;
+    margin-left:-.04em;
+  }
+  .sh-title{
+    font-weight:800;
+    font-size:clamp(34px, 4.4vw, 64px);
+    line-height:.92;letter-spacing:-.04em;
+  }
+  .sh-kick{margin-top:22px;font-size:18px;color:var(--mute);font-weight:500;max-width:36em}
+
+  /* generic ruled rows */
+  .rows > *{border-top:1px solid var(--hair)}
+  .rows > *:last-child{border-bottom:1px solid var(--hair)}
+  .lab{font-size:15px;font-weight:600;line-height:1.35}
+
+  /* ---------- SPEC TABLE: name | make & model | specification | qty ---------- */
+  .grp + .grp{margin-top:52px}
+  .gh{padding-bottom:10px;align-items:end}
+  .gh .gl{display:flex;gap:10px;font-size:15px;font-weight:600;line-height:1.35}
+  .gh .gl b{color:var(--red);font-weight:700;font-variant-numeric:tabular-nums}
+  .gh .ch{font-size:13px;font-weight:500;color:var(--mute);line-height:1.35}
+  .spec{padding:16px 0 18px;row-gap:4px;align-items:baseline}
+  .spec .nm{font-size:19px;font-weight:700;letter-spacing:-.015em;line-height:1.25}
+  .spec .mk{font-size:16px;font-weight:600;line-height:1.4}
+  .spec .sp{font-size:16px;color:var(--ink-2);line-height:1.45}
+  .spec .q{font-size:17px;font-weight:700;line-height:1.25;font-variant-numeric:tabular-nums}
+  /* URLs: 15px like index.html's tool cards; <wbr> after the host gives a clean break, the no-break space keeps the arrow on the URL's line */
+  a.spec .mk{color:var(--red);font-size:15px;overflow-wrap:anywhere}
+  a.spec .mk::after{content:"\202F\2197"}
+  a.spec:hover .nm{color:var(--red)}
+  @media (min-width:900px){
+    .spec .nm, .gh .gl{grid-column:1 / 4}
+    .spec .mk, .gh .c2{grid-column:4 / 7}
+    .spec .sp, .gh .c3{grid-column:7 / 12}
+    .spec .q,  .gh .c4{grid-column:12 / -1;text-align:right}
+    .spec .nm{padding-right:8px}
+    /* name-only rows and header-less group labels take the free columns instead of wrapping */
+    .spec .nm:only-child{grid-column:1 / 7}
+    .gh .gl:only-child{grid-column:1 / -1}
+  }
+  @media (max-width:899px){
+    .gh .ch{display:none}
+    .gh.bare{display:none}
+  }
+  /* tablet: name + make stacked on the left, specification on the right, qty at the edge */
+  @media (min-width:640px) and (max-width:899px){
+    .spec{grid-template-columns:minmax(0,5fr) minmax(0,6fr) 32px;grid-template-rows:auto 1fr}
+    .spec .nm{grid-column:1;grid-row:1}
+    .spec .mk{grid-column:1;grid-row:2}
+    .spec .sp{grid-column:2;grid-row:1 / span 2}
+    .spec .q{grid-column:3;grid-row:1;text-align:right}
+    .spec .nm:only-child{grid-column:1 / -1}
+  }
+  /* phone: stacked blocks; the name takes the full width unless the row has a qty */
+  @media (max-width:639px){
+    .spec{grid-template-columns:minmax(0,1fr) auto;column-gap:16px}
+    .spec .nm{grid-column:1;grid-row:1}
+    .spec:not(:has(.q)) .nm{grid-column:1 / -1}
+    .spec .q{grid-column:2;grid-row:1}
+    .spec .mk, .spec .sp{grid-column:1 / -1}
+    .spec .sp{margin-top:2px}
+  }
+
+  /* compact ruled list for generic bench gear */
+  .kit{display:grid;grid-template-columns:minmax(0,1fr);column-gap:var(--gap)}
+  .kit li{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin-bottom:-1px;padding:14px 0 18px;font-size:19px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
+  .kit li span{display:block;margin-top:4px;font-size:15px;font-weight:500;letter-spacing:0;color:var(--mute)}
+  @media (min-width:640px){ .kit{grid-template-columns:repeat(2,minmax(0,1fr))} }
+  @media (min-width:900px){ .kit{grid-template-columns:repeat(3,minmax(0,1fr))} }
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:space-between;gap:40px;
+    background:var(--ink);color:var(--bg);
+    font-size:16px;font-weight:600;
+    padding:18px 22px;min-width:280px;
+    transition:background-color .15s linear, color .15s linear;
+  }
+  .btn:hover{background:var(--red-deep);color:#fff}
+
+  /* ---------- CLOSING (the one red field) ---------- */
+  .join{background:var(--red-deep);color:#fff;border-top:0;padding-bottom:110px}
+  .join ::selection{background:var(--bg);color:#fff}
+  .join .btn{margin-top:40px;background:var(--bg);color:#fff}
+  .join .btn:hover{background:#fff;color:var(--bg)}
+  .join a:focus-visible{outline-color:#fff}
+  .cta .lab{padding-top:6px}
+  .cta .sh-title{max-width:13em}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:22px 0 30px;font-size:14px;font-weight:500}
+  .join + footer{border-top:0}
+  footer .g{row-gap:6px}
+  footer .dim{color:var(--mute)}
+  @media (min-width:900px){
+    footer .f1{grid-column:1 / 7}
+    footer .f2{grid-column:7 / 10}
+    footer .f3{grid-column:10 / -1}
+  }
+
+  /* ---------- TABLET / PHONE ---------- */
+  @media (max-width:899px){
+    .sec{padding:28px 0 80px}
+    .sh{margin-bottom:44px;row-gap:14px}
+    .sh-kick{margin-top:14px;font-size:16px}
+    .phead-g{row-gap:36px}
+    .intro{margin-top:20px}
+    .figs{margin-top:44px}
+    .band{margin-top:44px;padding-bottom:72px}
+    .cta{row-gap:18px}
+  }
+  @media (max-width:600px){
+    :root{--pad:20px;--gap:16px;--nav-h:56px}
+    body{font-size:16px}
+    .phead{padding-top:calc(var(--nav-h) + 20px)}
+    .phead-g{row-gap:28px}
+    .hero-title{font-size:38px}
+    .intro{font-size:17px}
+    .figs b{font-size:30px}
+    .band{margin-left:calc(-1 * var(--pad));margin-right:calc(-1 * var(--pad))}
+    .band figcaption{padding:0 var(--pad)}
+    .sh-num{font-size:56px}
+    .sh-title{font-size:clamp(30px, 9vw, 36px)}
+    .spec .nm{font-size:18px}
+    .spec .sp{font-size:15px}
+    .kit li{font-size:18px}
+    .btn{min-width:0;width:100%}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none !important;animation:none !important;scroll-behavior:auto !important}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand"><i aria-hidden="true"></i><span>Microwave &amp; Photonics Lab</span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#research"><b>01</b>Research</a>
+      <a href="index.html#about"><b>02</b>About</a>
+      <a href="index.html#news"><b>03</b>News</a>
+      <a href="index.html#publications"><b>04</b>Publications</a>
+      <a href="index.html#talks"><b>05</b>Talks</a>
+      <a href="index.html#team"><b>06</b>Team</a>
+      <a href="index.html#gallery"><b>07</b>Lab</a>
+      <a href="capabilities.html" aria-current="page"><b>08</b>Capabilities</a>
+      <a href="index.html#teaching"><b>09</b>Teaching</a>
+      <a href="index.html#tools"><b>10</b>Tools</a>
+      <a href="index.html#join"><b>11</b>Join</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEAD -->
+<header class="phead" id="top">
+  <div class="wrap">
+    <div class="g phead-g">
+      <p class="hero-inst c-l">Microwave &amp; Photonics Lab <span>Colorado School of Mines</span></p>
+      <div class="c-r">
+        <h1 class="hero-title">Lab capabilities</h1>
+        <p class="intro">
+          Our lab brings microwave and photonic test benches together. We measure from <strong>DC&nbsp;to&nbsp;50&nbsp;GHz</strong>, with vector network analysis to 43.5&nbsp;GHz and spectrum analysis to 50&nbsp;GHz, and reach further with mm-wave waveguide hardware and absolute power metrology up to <strong>3&nbsp;THz</strong>. On the optical side we run ultra-low-noise and narrow-linewidth lasers, <span class="nw">quantum-limited</span> photoreceivers and high-speed electro-optic devices, and two wedge wire bonders and an in-house fibre-to-PIC packaging station handle assembly. Our probe station provides <strong>mm-wave and photonics on-wafer probing</strong>, combining RF probing and fibre <span class="nw">edge-coupling</span> of photonic chips at the same time.
+        </p>
+      </div>
+    </div>
+
+    <ul class="figs">
+      <li><b>DC–&#8288;50<small>GHz</small></b><span>Connectorized RF components</span></li>
+      <li><b>43.5<small>GHz</small></b><span>Vector network analysis</span></li>
+      <li><b>50<small>GHz</small></b><span>Spectrum analysis</span></li>
+      <li><b>3<small>THz</small></b><span>Absolute THz power metrology</span></li>
+    </ul>
+
+    <div class="band">
+      <figure class="b1">
+        <div class="ph"><img src="labten.jpg" width="2000" height="1333" alt="MPI TS150-AIT probe station with a Moticam 4000 microscope camera" fetchpriority="high" /></div>
+        <figcaption>MPI TS150-AIT probe station with Moticam 4000 camera</figcaption>
+      </figure>
+      <figure class="b2">
+        <div class="ph"><img src="hero-probe.jpg" width="1024" height="682" alt="Microwave probe and optical fibres on a photonic integrated chip" /></div>
+        <figcaption>MPI TITAN GSG probe and optical fibres on a photonic chip</figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<!-- 01 RF & MICROWAVE -->
+<section class="sec" id="rf">
+  <div class="wrap">
+    <header class="sh g">
+      <div class="sh-num c-l">01</div>
+      <div class="c-r">
+        <h2 class="sh-title">RF &amp; microwave measurement</h2>
+        <p class="sh-kick">DC to 50&nbsp;GHz · on-wafer and connectorized</p>
+      </div>
+    </header>
+
+    <div class="grp">
+      <div class="gh g"><h3 class="gl"><b>1.1</b>On-wafer probing</h3><span class="ch c2" aria-hidden="true">Make &amp; model</span><span class="ch c3" aria-hidden="true">Specification</span><span class="ch c4" aria-hidden="true">Qty</span></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm">RF / mm-wave probe station</span><span class="mk">MPI TS150-AIT</span><span class="sp">150&nbsp;mm manual system for mm-wave and photonics on-wafer probing: simultaneous RF probing and fibre <span class="nw">edge-coupling</span> of photonic chips</span></li>
+        <li class="spec g"><span class="nm">RF probes</span><span class="mk">MPI TITAN T40A-GSG150</span><span class="sp">DC–&#8288;40&nbsp;GHz, 150&nbsp;µm pitch</span></li>
+        <li class="spec g"><span class="nm">Micropositioners</span><span class="mk">MPI MP60</span></li>
+        <li class="spec g"><span class="nm">Microscope camera</span><span class="mk">Motic Moticam 4000</span><span class="sp">4K</span></li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <div class="gh g"><h3 class="gl"><b>1.2</b>Network analysis</h3></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm">PNA microwave vector network analyzer</span><span class="mk">Keysight N5224A</span><span class="sp">10&nbsp;MHz–&#8288;43.5&nbsp;GHz, 4-port</span></li>
+        <li class="spec g"><span class="nm">USB vector network analyzers</span><span class="mk">Copper Mountain</span><span class="sp">Up to 8&nbsp;GHz</span><span class="q">×5</span></li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <div class="gh g"><h3 class="gl"><b>1.3</b>Spectrum &amp; signal analysis</h3></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm">Spectrum analyzer</span><span class="mk">HP/Agilent 8565E</span><span class="sp">20&nbsp;Hz–&#8288;50&nbsp;GHz</span></li>
+        <li class="spec g"><span class="nm">USB real-time spectrum analyzers</span><span class="mk">Tektronix RSA306B</span><span class="sp">9&nbsp;kHz–&#8288;6.2&nbsp;GHz, 40&nbsp;MHz real-time bandwidth</span><span class="q">×2</span></li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <div class="gh g"><h3 class="gl"><b>1.4</b>Noise &amp; power measurement</h3></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm">Noise-figure measurement system</span><span class="mk">HP</span><span class="sp">With external mixer and ~20&nbsp;GHz LO</span></li>
+        <li class="spec g"><span class="nm">Noise source</span><span class="mk">Keysight 346CK01</span><span class="sp">1–&#8288;50&nbsp;GHz, 346-series</span></li>
+        <li class="spec g"><span class="nm">USB wide-dynamic-range peak &amp; average power sensor</span><span class="mk">Keysight U2064XA</span><span class="sp">10&nbsp;MHz–&#8288;40&nbsp;GHz, −70 to +20&nbsp;dBm</span></li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <div class="gh g"><h3 class="gl"><b>1.5</b>Signal sources</h3></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm">RF signal generators</span><span class="mk">NI PXI-5652</span><span class="sp">500&nbsp;kHz–&#8288;6.6&nbsp;GHz</span><span class="q">×2</span></li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <div class="gh g"><h3 class="gl"><b>1.6</b>RF components</h3></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm">Connectorized RF components</span><span class="sp">LNAs, PAs, mixers, directional couplers and other connectorized components, DC–&#8288;50&nbsp;GHz</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 02 MM-WAVE & THZ -->
+<section class="sec" id="mmwave">
+  <div class="wrap">
+    <header class="sh g">
+      <div class="sh-num c-l">02</div>
+      <div class="c-r">
+        <h2 class="sh-title">Millimeter-wave &amp; THz</h2>
+        <p class="sh-kick">Waveguide hardware and power metrology up to 3&nbsp;THz</p>
+      </div>
+    </header>
+
+    <div class="grp">
+      <div class="gh g bare"><span class="ch c2" aria-hidden="true">Make &amp; model</span><span class="ch c3" aria-hidden="true">Specification</span></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm">mm-wave waveguide components and upconverters</span></li>
+        <li class="spec g"><span class="nm">Absolute THz power/energy meter</span><span class="mk">Thomas Keating</span><span class="sp">Photo-acoustic, self-calibrating; 30&nbsp;GHz–&#8288;3&nbsp;THz</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 03 PHOTONICS -->
+<section class="sec" id="photonics">
+  <div class="wrap">
+    <header class="sh g">
+      <div class="sh-num c-l">03</div>
+      <div class="c-r">
+        <h2 class="sh-title">Photonics</h2>
+        <p class="sh-kick">Lasers, detection, modulation and fibre coupling</p>
+      </div>
+    </header>
+
+    <div class="grp">
+      <div class="gh g"><h3 class="gl"><b>3.1</b>Lasers</h3><span class="ch c2" aria-hidden="true">Make &amp; model</span><span class="ch c3" aria-hidden="true">Specification</span></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm">Ultra-low-noise laser</span><span class="mk">Thorlabs ULN15TK</span><span class="sp">1550&nbsp;nm nominal; 120&nbsp;mW typ.; 100&nbsp;Hz typ. Lorentzian linewidth; RIN&nbsp;−160&nbsp;dBc/Hz typ. (10&nbsp;MHz); PM FC/APC output</span></li>
+        <li class="spec g"><span class="nm">Tunable external-cavity diode laser</span><span class="mk">TOPTICA DL pro</span><span class="sp">With DLC pro digital laser controller</span></li>
+        <li class="spec g"><span class="nm">Hybrid-integrated narrow-linewidth laser</span><span class="mk">Deeplight DLT-NL-1550</span><span class="sp">1550&nbsp;nm; intrinsic linewidth &lt;&nbsp;50&nbsp;Hz, integrated linewidth &lt;&nbsp;5&nbsp;kHz; butterfly package</span></li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <div class="gh g"><h3 class="gl"><b>3.2</b>Detection &amp; modulation</h3></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm"><span class="nw">Quantum-limited</span> photoreceivers</span></li>
+        <li class="spec g"><span class="nm">High-speed photodetectors</span></li>
+        <li class="spec g"><span class="nm">High-speed electro-optic modulators</span></li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <div class="gh g"><h3 class="gl"><b>3.3</b>Fibre coupling</h3></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm">Fibre edge-coupling positioners</span><span class="mk">Thorlabs</span><span class="sp">At the probe station, for <span class="nw">edge-coupling</span> photonic chips</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PACKAGING -->
+<section class="sec" id="packaging">
+  <div class="wrap">
+    <header class="sh g">
+      <div class="sh-num c-l">04</div>
+      <div class="c-r">
+        <h2 class="sh-title">Packaging &amp; assembly</h2>
+        <p class="sh-kick">Wire bonding and fibre-to-PIC packaging</p>
+      </div>
+    </header>
+
+    <div class="grp">
+      <div class="gh g bare"><span class="ch c2" aria-hidden="true">Make &amp; model</span><span class="ch c3" aria-hidden="true">Specification</span></div>
+      <ul class="rows">
+        <li class="spec g"><span class="nm">Wedge-wedge wire bonder</span><span class="mk">West Bond 7400A</span><span class="sp">Ultrasonic/thermosonic, 45° feed; Al/Au wire 18–&#8288;51&nbsp;µm (0.7–&#8288;2&nbsp;mil)</span></li>
+        <li class="spec g"><span class="nm">Thermosonic wedge bonder</span><span class="mk">Hybond 676</span><span class="sp">Deep-access vertical feed; Au wire 12–&#8288;76&nbsp;µm, ribbon up to 25&nbsp;×&nbsp;300&nbsp;µm; stage to 250&nbsp;°C</span></li>
+        <li class="spec g"><span class="nm">Fibre-to-PIC packaging station</span><span class="mk">Built in-house</span><span class="sp">Packaging of optical fibres to photonic integrated circuits</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 05 GENERAL -->
+<section class="sec" id="general">
+  <div class="wrap">
+    <header class="sh g">
+      <div class="sh-num c-l">05</div>
+      <div class="c-r">
+        <h2 class="sh-title">General lab equipment</h2>
+        <p class="sh-kick">Bench instruments, cables and adapters</p>
+      </div>
+    </header>
+
+    <ul class="kit">
+      <li>Oscilloscopes</li>
+      <li>DC power supplies</li>
+      <li>Function generators</li>
+      <li>Additional sources and spectrum analyzers</li>
+      <li>2.4&nbsp;mm test-port cables</li>
+      <li>RF cables and adapters</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 06 SOFTWARE -->
+<section class="sec" id="software">
+  <div class="wrap">
+    <header class="sh g">
+      <div class="sh-num c-l">06</div>
+      <div class="c-r">
+        <h2 class="sh-title">In-house software</h2>
+        <p class="sh-kick">Free, browser-based · built in the lab</p>
+      </div>
+    </header>
+
+    <div class="grp">
+      <div class="gh g bare"><span class="ch c2" aria-hidden="true">Address</span><span class="ch c3" aria-hidden="true">What it does</span></div>
+      <ul class="rows">
+        <li><a class="spec g" href="https://tl.mwphotonics.com" target="_blank" rel="noopener"><span class="nm">Transmission-Line Wave Visualizer</span><span class="mk">tl.<wbr>mwphotonics.com</span><span class="sp">Interactive animation of voltage and current waves on lossless transmission lines: reflections, bounce diagrams, cascaded sections and standing waves. Used in EENG&nbsp;530.</span></a></li>
+        <li><a class="spec g" href="https://sstudio.mwphotonics.com" target="_blank" rel="noopener"><span class="nm">S-Param Studio</span><span class="mk">sstudio.<wbr>mwphotonics.com</span><span class="sp">Import Touchstone .sNp files and plot <span class="nw">S-parameter</span>s on XY or Smith charts, with markers and publication-ready PNG/PDF export.</span></a></li>
+        <li><a class="spec g" href="https://easyrfpic.mwphotonics.com" target="_blank" rel="noopener"><span class="nm">easyRFPIC</span><span class="mk">easyrfpic.<wbr>mwphotonics.com</span><span class="sp">Layout tool for RF-photonic integrated circuits.</span></a></li>
+        <li><a class="spec g" href="https://nc.mwphotonics.com" target="_blank" rel="noopener"><span class="nm">NC Explorer</span><span class="mk">nc.<wbr>mwphotonics.com</span><span class="sp">NetCDF (.nc) plotter for instrument data. Explore multidimensional sweeps with sliders and 2D, rainbow or 3D plots. Files never leave your computer.</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="sec join" id="contact">
+  <div class="wrap">
+    <div class="g cta">
+      <p class="lab c-l">Contact</p>
+      <div class="c-r">
+        <h2 class="sh-title">Interested in collaborating or using our facilities?</h2>
+        <a class="btn js-mail" href="#contact"><span>Email us</span><span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap g">
+    <div class="f1">© 2026 · Microwave &amp; Photonics Lab · Colorado School of Mines</div>
+    <div class="f3 dim">Designed by Gabriela Santamaria</div>
+  </div>
+</footer>
+
+<script>
+  // Email links: address assembled at runtime so it never appears in the HTML
+  (function(){
+    const addr = ['Gabriel.SantamariaBotello', 'mines.edu'].join('@');
+    document.querySelectorAll('.js-mail').forEach(a => a.href = 'mailto:' + addr);
+  })();
+
+  // Compact-screen menu
+  (function(){
+    const nav = document.getElementById('nav');
+    const btn = document.getElementById('menuBtn');
+    const close = () => {
+      if (!nav.classList.contains('open')) return;
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = 'Menu';
+    };
+    btn.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.textContent = open ? 'Close' : 'Menu';
+    });
+    document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', close));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { const was = nav.classList.contains('open'); close(); if (was) btn.focus(); } });
+    document.addEventListener('click', e => { if (!nav.contains(e.target)) close(); });
+  })();
+</script>
+
+</body>
+</html>
