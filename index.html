@@ -254,6 +254,9 @@
     .logos img.wide, .logos img.mid{max-width:min(100%, 172px)}
   }
   @media (min-width:900px){ .support .grp .lab{padding-top:0} .logos{margin-top:0} }
+  /* partners: 10 logos -> 5 full rows of 2 up to 1180px, 2 full rows of 5 on wide screens */
+  @media (min-width:640px) and (max-width:1180px){ .logos.five{grid-template-columns:repeat(2,minmax(0,1fr))} }
+  @media (min-width:1181px){ .logos.five{grid-template-columns:repeat(5,minmax(0,1fr))} }
 
   /* ---------- PI ---------- */
   .pi-photo img{width:100%;aspect-ratio:4 / 5;object-fit:cover;object-position:center top;background:var(--ph)}
@@ -612,7 +615,7 @@
     </div>
     <div class="grp g">
       <div class="c-l"><h2 class="lab">Partners &amp; Collaborators</h2></div>
-      <ul class="logos c-r">
+      <ul class="logos five c-r">
         <li><img src="ussf.png" alt="United States Space Force" class="tall inv" /></li>
         <li><img src="bifrost.png" alt="Bifrost Electronics" class="wide" /></li>
         <li><img src="lumenastra.png" alt="Lumenastra" class="wide" /></li>
@@ -620,6 +623,7 @@
         <li><img src="cuboulder-white.svg" alt="University of Colorado Boulder" class="flat" /></li>
         <li><img src="uc3m.png" alt="Universidad Carlos III de Madrid" class="tall seal" /></li>
         <li><img src="otago.svg" alt="University of Otago" class="mid" /></li>
+        <li><img src="tampere.svg" alt="Tampere University" class="mid" /></li>
         <li><img src="esa.png" alt="European Space Agency" class="wide" /></li>
         <li><img src="airbus.svg" alt="Airbus" class="wide" /></li>
       </ul>
