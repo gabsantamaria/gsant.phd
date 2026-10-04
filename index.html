@@ -431,6 +431,8 @@
   .join + footer{border-top:0}   /* hard red-to-black edge, no light seam */
   footer .g{row-gap:6px}
   footer .dim{color:var(--mute)}
+  footer a.credit{color:inherit;text-decoration:underline;text-decoration-color:rgba(155,155,155,.55);text-underline-offset:3px;transition:color .15s, text-decoration-color .15s}
+  footer a.credit:hover, footer a.credit:focus-visible{color:var(--ink);text-decoration-color:currentColor}
   @media (min-width:900px){
     footer .f1{grid-column:1 / 7}
     footer .f2{grid-column:7 / 10}
@@ -1117,7 +1119,7 @@
 <footer>
   <div class="wrap g">
     <div class="f1">© 2026 · Microwave &amp; Photonics Lab · Colorado School of Mines</div>
-    <div class="f3 dim">Designed by Gabriela Santamaria</div>
+    <div class="f3 dim"><a class="credit" href="http://gabrielasantamaria.es/" target="_blank" rel="noopener">Designed by Gabriela Santamaria</a></div>
   </div>
 </footer>
 
